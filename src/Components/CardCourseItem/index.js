@@ -13,6 +13,7 @@ import { Delete } from "Icons/Delete";
 import useModal from "hooks/useModal";
 import ModalEditCourse from "Components/Modals/ModalEditCourse";
 import ModalDeleteCourse from "Components/Modals/ModalDeleteCourse";
+
 const CardCourseItem = ({ course }) => {
   const { isOpen, handleModalState } = useModal();
   const [showModalEdit, setShowModalEdit] = useState(false);
