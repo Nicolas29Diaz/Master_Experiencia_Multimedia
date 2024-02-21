@@ -24,7 +24,7 @@ const Enviroment = ({ location }) => {
   // Lo que recibo
   useEffect(() => {
     window.addEventListener("message", function (e) {
-      if (e.origin !== "https://melodious-horse-18ea10.netlify.app/") return;
+      if (e.origin !== "https://melodious-horse-18ea10.netlify.app") return;
 
       if (e.data === "Abort") {
         handleModalState();
@@ -33,7 +33,7 @@ const Enviroment = ({ location }) => {
       if (e.data === "openedReady") {
         iFrameRef.current?.contentWindow.postMessage(
           JSON.stringify(location.state),
-          "https://melodious-horse-18ea10.netlify.app/"
+          "https://melodious-horse-18ea10.netlify.app"
         );
       }
 
@@ -58,7 +58,7 @@ const Enviroment = ({ location }) => {
           title="Entorno"
           frameBorder={0}
           allowFullScreen
-          src="https://melodious-horse-18ea10.netlify.app/"
+          src="https://melodious-horse-18ea10.netlify.app"
         />
       </ContainerIframe>
 
