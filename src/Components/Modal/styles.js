@@ -23,9 +23,21 @@ export const Content = styled(animated.div)`
   padding: 1.25rem;
   position: relative;
   width: 100%;
-
+  margin: 15px;
   & p {
     margin: 20px 0;
     font-family: Raleway;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px
   }
 `;

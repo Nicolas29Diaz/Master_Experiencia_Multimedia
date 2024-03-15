@@ -18,7 +18,7 @@ import TeacherGroupsPractice from "Components/TeacherGroupsPractice";
 import PracticesPageStudent from "Pages/PracticesPageStudent";
 import Enviroment from "Components/Enviroment";
 import NotFound from "Pages/NotFound";
-
+import Students from "Components/Resources/Students";
 // Revisar si tenemos token
 const token = localStorage.getItem("token");
 
@@ -42,6 +42,11 @@ function App() {
                     exact
                     path="/courses"
                     component={CoursesPageTeacher}
+                  />
+                   <PrivateRoute
+                    exact
+                    path="/courses/resources/student"
+                    component={Students}
                   />
                   <PrivateRoute
                     exact
