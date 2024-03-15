@@ -7,16 +7,15 @@ import { TeacherCoursesContainer } from "./styles";
 import CardCourseItem from "Components/CardCourseItem";
 import Dashboard from "Components/Dashboard";
 import Loading from "Components/Loading";
-import ModalSelectResource from "Components/Modals/ModalSelectResource";
 import { useState } from "react";
-
+import ModalSelectResource from "Components/Modals/Resources/ModalSelectResource";
+import styled from "styled-components";
 const TeacherCourses = () => {
   const { getCourses, courses, isloading } = useTeacher();
   const { isOpen, handleModalState } = useModal();
   const { isOpen: isOpenR, handleModalState: handleModalStateR } = useModal();
 
   const [showModal, setShowModal] = useState(false);
-
 
   useEffect(() => {
     getCourses();
@@ -33,11 +32,24 @@ const TeacherCourses = () => {
       ) : (
         <Dashboard
           titleHeader="Cursos"
-          textButton="Crear curso"
-          onClick={() => {
-            handleModalStateR();
-            setShowModal(true);
-          }}
+          buttons={[
+            {
+              style: "secondary",
+              action: () => {
+                setShowModal(true);
+                handleModalStateR();
+              },
+              text: "Recursos",
+            },
+            {
+              style: "secondary",
+              action: () => {
+                setShowModal(true);
+                handleModalState();
+              },
+              text: "Crear curso",
+            },
+          ]}
         >
           <TeacherCoursesContainer courses={courses}>
             {courses.length > 0 ? (
@@ -53,14 +65,6 @@ const TeacherCourses = () => {
 
           {showModal && (
             <ModalSelectResource isOpen={isOpenR} close={handleModalStateR} />
-            // <Modal isOpen={isOpenR} close={handleModalStateR}>
-            //   <h1>¿Listo para crear un nuevo curso?</h1>
-            //   <p>Ingresa en el siguiente campo el nombre de tu nuevo curso</p>
-
-            //   <button onClick={() => history.push("/courses/resources")}>
-            //     Cancelar
-            //   </button>
-            // </Modal>
           )}
         </Dashboard>
       )}

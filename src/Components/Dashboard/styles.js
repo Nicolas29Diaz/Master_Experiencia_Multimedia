@@ -10,10 +10,22 @@ export const HeaderContainer = styled.div`
   padding-top: 10px;
 `;
 
+export const ContainerTittleButtons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const ContainerButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
+
+  @media (max-width: 645px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const TitleHeader = styled.h1`

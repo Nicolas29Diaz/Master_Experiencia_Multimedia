@@ -20,6 +20,7 @@ const ModalSelectResource = ({ isOpen, close }) => {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <h1>¿Qué tipo de recurso quieres gestionar?</h1>
         <p>Selecciona el tipo de recurso que deseas crear o eliminar.</p>
+
         <ButtonContainer>
           <Button
             type="button"
