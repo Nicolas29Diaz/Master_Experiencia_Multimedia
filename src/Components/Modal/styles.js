@@ -23,6 +23,7 @@ export const Content = styled(animated.div)`
   padding: 1.25rem;
   position: relative;
   width: 100%;
+  margin:20px;
 
   & p {
     margin: 20px 0;

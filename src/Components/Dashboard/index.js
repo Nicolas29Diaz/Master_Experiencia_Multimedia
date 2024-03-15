@@ -4,6 +4,7 @@ import {
   HeaderContainer,
   TitleHeader,
   ContainerButton,
+  ButtonContainer,
 } from "./styles";
 import Banner from "Components/Banner";
 import Button from "Components/Button";
@@ -13,8 +14,9 @@ const Dashboard = ({
   banner,
   titleHeader,
   textButton,
-  onClick = {},
+  onClick = [],
   backButton,
+  resources = false,
 }) => {
   const history = useHistory();
   return (
@@ -36,9 +38,26 @@ const Dashboard = ({
           <ContainerButton>
             <TitleHeader>{titleHeader}</TitleHeader>
             {textButton && (
-              <Button type="button" styleButton="secondary" onClick={onClick}>
-                {textButton}
-              </Button>
+              <>
+                <ButtonContainer>
+                  {resources && (
+                    <Button
+                      type="button"
+                      styleButton="secondary"
+                      onClick={onClick[1]}
+                    >
+                      Recursos
+                    </Button>
+                  )}
+                  <Button
+                    type="button"
+                    styleButton="secondary"
+                    onClick={onClick[0]}
+                  >
+                    {textButton}
+                  </Button>
+                </ButtonContainer>
+              </>
             )}
           </ContainerButton>
         </HeaderContainer>

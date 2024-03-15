@@ -130,38 +130,41 @@ const StudentDashboardPractices = () => {
                   estado,
                   idCorte,
                 }) => (
-                  <CardContainer key={id}>
-                    <BackgrounImage>
-                      {ICONS_PRODUCTS[nombreProducto]}
-                    </BackgrounImage>
-                    <CardInfo>
-                      <h1>{nombrePractica}</h1>
-                      <p>Producto: {nombreProducto}</p>
-                      <p>F. Publicación: {fecha}</p>
-                      <StateCard estado={estado}>{estado}</StateCard>
-                    </CardInfo>
-                    <ActionButtonContainer>
-                      <Button
-                        type="button"
-                        styleButton="primary"
-                        onClick={() => {
-                          estado === "Realizada"
-                            ? handleRedirectoResults(id, idCorte)
-                            : handleRedirectoPractice({
-                                nombrePractica,
-                                idPractica: id,
-                                idCorte,
-                                nombreProducto,
-                                descripcion,
-                              });
-                        }}
-                      >
-                        {estado === "Realizada"
-                          ? "Ver resultados"
-                          : "Iniciar práctica"}
-                      </Button>
-                    </ActionButtonContainer>
-                  </CardContainer>
+                  <>
+                    {console.log(nombreProducto)}
+                    <CardContainer key={id}>
+                      <BackgrounImage>
+                        {ICONS_PRODUCTS[nombreProducto]}
+                      </BackgrounImage>
+                      <CardInfo>
+                        <h1>{nombrePractica}</h1>
+                        <p>Producto: {nombreProducto}</p>
+                        <p>F. Publicación: {fecha}</p>
+                        <StateCard estado={estado}>{estado}</StateCard>
+                      </CardInfo>
+                      <ActionButtonContainer>
+                        <Button
+                          type="button"
+                          styleButton="primary"
+                          onClick={() => {
+                            estado === "Realizada"
+                              ? handleRedirectoResults(id, idCorte)
+                              : handleRedirectoPractice({
+                                  nombrePractica,
+                                  idPractica: id,
+                                  idCorte,
+                                  nombreProducto,
+                                  descripcion,
+                                });
+                          }}
+                        >
+                          {estado === "Realizada"
+                            ? "Ver resultados"
+                            : "Iniciar práctica"}
+                        </Button>
+                      </ActionButtonContainer>
+                    </CardContainer>
+                  </>
                 )
               )}
           </StudentPracticesContainer>

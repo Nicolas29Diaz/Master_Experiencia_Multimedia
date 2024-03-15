@@ -7,10 +7,27 @@ import { TeacherCoursesContainer } from "./styles";
 import CardCourseItem from "Components/CardCourseItem";
 import Dashboard from "Components/Dashboard";
 import Loading from "Components/Loading";
-
+import ModalGeneral from "Components/Modals/ModalGeneral";
+import { useHistory } from "react-router-dom";
 const TeacherCourses = () => {
   const { getCourses, courses, isloading } = useTeacher();
-  const { isOpen, handleModalState } = useModal();
+  const { isOpen: isOpenCurse, handleModalState: handleModalStateCurse } =
+    useModal();
+  const {
+    isOpen: isOpenResources,
+    handleModalState: handleModalStateResources,
+  } = useModal();
+
+  let history = useHistory();
+
+  // const handleHistory = (resourceType) => {
+  //   handleModalStateResources();
+  //   history.push(`/resources/${resourceType}`);
+  // };
+  // const handleHistory2 = () => {
+  //   handleModalStateResources();
+  //   history.push(`/resources/video`);
+  // };
 
   useEffect(() => {
     getCourses();
@@ -25,7 +42,8 @@ const TeacherCourses = () => {
         <Dashboard
           titleHeader="Cursos"
           textButton="Crear curso"
-          onClick={handleModalState}
+          onClick={[handleModalStateCurse, handleModalStateResources]}
+          resources={true}
         >
           <TeacherCoursesContainer courses={courses}>
             {courses.length > 0 ? (
@@ -37,7 +55,48 @@ const TeacherCourses = () => {
             )}
           </TeacherCoursesContainer>
 
-          <ModalCourse isOpen={isOpen} close={handleModalState} />
+          <ModalCourse isOpen={isOpenCurse} close={handleModalStateCurse} />
+          <ModalGeneral
+            isOpen={isOpenResources}
+            close={handleModalStateResources}
+            title={"¿Qué tipo de recurso quieres gestionar?"}
+            description={
+              "Selecciona el tipo de recurso que deseas crear o eliminar."
+            }
+            buttonsDown={[
+              {
+                text: "Cancelar",
+                styleButton: "secondary",
+                onClick: handleModalStateResources,
+              },
+            ]}
+            buttonsMiddle={[
+              {
+                text: "Estudiantes",
+                styleButton: "primary",
+                onClick: () => {
+                  // handleHistory("student");
+                  console.log("");
+                },
+              },
+              {
+                text: "Videos",
+                styleButton: "primary",
+                onClick: () => {
+                  // handleHistory("video");
+                  console.log("");
+                },
+              },
+              {
+                text: "Documentos",
+                styleButton: "primary",
+                onClick: () => {
+                  // handleHistory("document");
+                  console.log("");
+                },
+              },
+            ]}
+          />
         </Dashboard>
       )}
     </>

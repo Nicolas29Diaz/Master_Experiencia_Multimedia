@@ -14,3 +14,15 @@ export const Actions = styled.div`
     margin-left: 14px;
   }
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 15px 0px;
+  @media (max-width: 600px) {
+    flex-direction: column; /* Cambia la dirección del flexbox a columna */
+    align-items: center; /* Centra los elementos */
+    gap:10px;
+  }
+`;

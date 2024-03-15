@@ -18,7 +18,7 @@ import TeacherGroupsPractice from "Components/TeacherGroupsPractice";
 import PracticesPageStudent from "Pages/PracticesPageStudent";
 import Enviroment from "Components/Enviroment";
 import NotFound from "Pages/NotFound";
-
+import Video from "Components/Resources/Video";
 // Revisar si tenemos token
 const token = localStorage.getItem("token");
 
@@ -43,6 +43,25 @@ function App() {
                     path="/courses"
                     component={CoursesPageTeacher}
                   />
+
+                  <PrivateRoute
+                    exact
+                    path="/resources/video"
+                    component={Video}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/resources/document"
+                    component={Video}
+                  />
+                
+                <PrivateRoute
+                    exact
+                    path="/resources/student"
+                    component={Video}
+                  />
+                
+                
                   <PrivateRoute
                     exact
                     path="/courses/:idCurso"
