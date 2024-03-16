@@ -9,7 +9,6 @@ import Dashboard from "Components/Dashboard";
 import Loading from "Components/Loading";
 import { useState } from "react";
 import ModalSelectResource from "Components/Modals/Resources/ModalSelectResource";
-import styled from "styled-components";
 const TeacherCourses = () => {
   const { getCourses, courses, isloading } = useTeacher();
   const { isOpen, handleModalState } = useModal();
@@ -20,10 +19,13 @@ const TeacherCourses = () => {
   useEffect(() => {
     getCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(()=>{
     return () => {
       console.log("Chao Curso");
     };
-  }, []);
+  },[])
 
   return (
     <>

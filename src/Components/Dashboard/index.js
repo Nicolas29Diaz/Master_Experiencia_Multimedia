@@ -35,31 +35,20 @@ const Dashboard = ({
 
           <ContainerTittleButtons>
             <TitleHeader>{titleHeader}</TitleHeader>
-            {
-              buttons.length > 0 && (
-                <ContainerButton>
-                  {buttons.map((item, index) => (
-                    <Button
-                      key={index}
-                      type="button"
-                      styleButton={item.style}
-                      onClick={item.action}
-                    >
-                      {item.text}
-                    </Button>
-                  ))}
-                </ContainerButton>
-              )
-
-              // <ContainerButton>
-              //   <Button type="button" styleButton="secondary" onClick={onClick}>
-              //     {textButton}
-              //   </Button>
-              //   <Button type="button" styleButton="secondary" onClick={onClick}>
-              //     {textButton}
-              //   </Button>
-              // </ContainerButton>
-            }
+            {buttons.length > 0 && (
+              <ContainerButton>
+                {buttons.map((item, index) => (
+                  <Button
+                    key={index}
+                    type="button"
+                    styleButton={item.style}
+                    onClick={item.action}
+                  >
+                    {item.text}
+                  </Button>
+                ))}
+              </ContainerButton>
+            )}
           </ContainerTittleButtons>
         </HeaderContainer>
         {children}

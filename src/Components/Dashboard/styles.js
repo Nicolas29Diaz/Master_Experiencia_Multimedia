@@ -14,6 +14,11 @@ export const ContainerTittleButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 450px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
 `;
 
 export const ContainerButton = styled.div`
@@ -29,6 +34,6 @@ export const ContainerButton = styled.div`
 `;
 
 export const TitleHeader = styled.h1`
-  margin: 28px 0;
+  margin: 10px 0;
   font-family: Lato;
 `;
