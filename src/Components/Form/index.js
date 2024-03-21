@@ -206,7 +206,7 @@ const Form = () => {
                     },
                     ...students,
                   ]}
-                  widthSelect={"20rem"}
+                  widthSelect={"15rem"}
                   closeMenuOnSelect={false}
                   getOptionLabel={(option) => option.estudiante}
                   getOptionValue={(option) => option.idEstudiante}
@@ -232,11 +232,11 @@ const Form = () => {
                   loadOptions={documents}
                   isMulti={true}
                   defaultOptions={[...documents]}
-                  widthSelect={"20rem"}
+                  widthSelect={"15rem"}
                   closeMenuOnSelect={false}
                   getOptionLabel={(option) => option.nombreRecurso}
                   getOptionValue={(option) => option.idRecurso}
-                  placeholder="Seleccionar Documentos"
+                  placeholder="Documentos para la práctica"
                   error={error?.field?.idRecursos}
                   onChange={(e, option) => {
                     onChange(e);
@@ -270,7 +270,7 @@ const Form = () => {
           <PracticeGroup />
 
           <Row>
-            <ButtonActions>
+            
               <Button
                 type="button"
                 styleButton="secondary"
@@ -286,7 +286,7 @@ const Form = () => {
               >
                 Publicar
               </Button>
-            </ButtonActions>
+            
           </Row>
         </FormStyle>
       </FormProvider>

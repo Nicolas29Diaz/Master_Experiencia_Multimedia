@@ -44,7 +44,10 @@ function ModalDocuments({ isOpen, close }) {
           {
             text: "Subir",
             style: "primary",
-            action: () => console.log("Subir"),
+            action: () => {
+              close();
+              handleModalStateSubir();
+            },
           },
         ]}
       >
@@ -66,7 +69,7 @@ function ModalDocuments({ isOpen, close }) {
                             nombreRecurso: item.nombreRecurso,
                             idRecurso: item.idRecurso,
                           });
-                          // handleModalStateDelete();
+                          handleModalStateDelete();
                         }}
                       >
                         Eliminar

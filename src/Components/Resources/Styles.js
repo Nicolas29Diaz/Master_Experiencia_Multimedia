@@ -4,9 +4,9 @@ export const DocumentContainer = styled.div`
   max-height: 50vh; /* Altura máxima para el scroll */
   overflow-y: auto; /* Habilitar el scroll vertical */
   margin: 40px auto 0 auto; /* Espacio alrededor del contenedor */
-  width: 80vw;
-  max-width: 800px;
+  max-width: 100%;
   border-radius: 10px;
+  padding: 0px;
   ${scrollBarStyle} /* Agregar el estilo de la barra de desplazamiento */
 `;
 
@@ -24,6 +24,7 @@ export const DocumentItem = styled.div`
   background-color: #f9f9f9; /* Color de fondo */
   border-radius: 5px; /* Bordes redondeados */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+  min-height:100px;
   @media (max-width: 900px) {
     flex-direction: column;
     align-items: center;
