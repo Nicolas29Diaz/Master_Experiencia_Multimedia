@@ -9,22 +9,26 @@ import {
 import Banner from "Components/Banner";
 import Button from "Components/Button";
 import { useHistory } from "react-router";
+
 const Dashboard = ({
   children,
   banner,
   titleHeader,
   backButton,
   buttons = [],
+  goBack = false,
 }) => {
   const history = useHistory();
   return (
     <>
       <DashboardContainer>
-        {backButton && (
+        {(backButton || goBack) && (
           <Button
             type="button"
             styleButton="secondary"
-            onClick={() => history.push(backButton)}
+            onClick={() => {
+              goBack ? history.goBack() : history.push(backButton);
+            }}
           >
             Volver
           </Button>

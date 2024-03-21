@@ -8,23 +8,37 @@ import { uploadFile, deleteFile } from "config/firebase";
 
 function ResoucesState({ children }) {
   const initialState = {
-    isLoading: false,
+    isloading: false,
     videos: [],
     documents: [],
+    students: [],
   };
 
   const [state, dispatch] = useReducer(ResourcesReducer, initialState);
 
-  const Loading = () =>
+  const Loading = () => {
     dispatch({
       type: "RESOURCES_LOADING",
       payload: true,
     });
-
-  const getVideos = async () => {
-    // const response = await axiosClient.get("/api/recursos/videos");
   };
 
+  //VIDEO
+  const getVideos = async () => {
+    try {
+      Loading();
+      const response = await axiosClient.get("/api/recursos/videos");
+      dispatch({
+        type: "GET_VIDEOS",
+        payload: response.data,
+      });
+    } catch (error) {
+      Error();
+      console.log(error);
+    }
+  };
+
+  //DOCUMENTS
   const getDocuments = async () => {
     try {
       Loading();
@@ -117,6 +131,20 @@ function ResoucesState({ children }) {
     }
   };
 
+  //STUDENTS
+  const getStudents = async () => {
+    try {
+      Loading();
+      const response = await axiosClient.get("/api/estudiante/all");
+      dispatch({
+        type: "GET_STUDENTS",
+        payload: response.data.estudiantes,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const changeVideo = () => {};
 
   return (
@@ -124,11 +152,14 @@ function ResoucesState({ children }) {
       value={{
         videos: state.videos,
         documents: state.documents,
+        students: state.students,
+        isloading: state.isloading,
         getVideos,
         getDocuments,
         postDocuments,
         deleteDocuments,
         changeVideo,
+        getStudents,
       }}
     >
       {children}

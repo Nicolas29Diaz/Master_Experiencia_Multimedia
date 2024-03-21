@@ -11,6 +11,7 @@ import MultiSelectAll from "Components/MultiSelectAll";
 import TextArea from "Components/TextArea";
 import PracticeGroup from "Components/Practice/PracticeGroup";
 import { useHistory, useParams } from "react-router-dom";
+import ModalDocuments from "Components/Modals/Resources/ModalDocuments";
 
 import ModalForm from "Components/Modals/ModalForm";
 import useModal from "hooks/useModal";
@@ -21,8 +22,11 @@ import {
   registerPracticeModule3,
 } from "./FormServices";
 import ModalExitForm from "Components/Modals/ModalExitForm";
+import useResource from "hooks/useResource";
+
 //Data
 import { optionsModulos, CORTE1, CORTE2, CORTE3 } from "constants/index";
+import { func } from "prop-types";
 
 const Form = () => {
   const methods = useForm();
@@ -39,8 +43,16 @@ const Form = () => {
   // Estado que almacena temporalmente la información antes de confirmar
   // la creación de la práctica
   const [dataForm, setDataForm] = useState([]);
+  const [resources, setResources] = useState([]);
 
   const { isOpen, handleModalState } = useModal();
+
+  //Docs
+  const { getDocuments, documents } = useResource();
+  const {
+    isOpen: isOpenDocuments,
+    handleModalState: handleModalStateDocuments,
+  } = useModal();
 
   const parseIntIdCurso = Number(idCurso);
 
@@ -58,6 +70,8 @@ const Form = () => {
     setIsSendForm(false);
   };
   useEffect(() => {
+    getDocuments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     getStudents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,21 +79,35 @@ const Form = () => {
   useEffect(() => {
     /* Función que envía todos los datos del formulario */
     const handleOnSubmit = async (data) => {
+      const ids = handleDocuments(data.idRecursos);
+      console.log({ ...data, parseIntIdCurso, idRecursos: ids });
       const {
         field: {
           modulo: { value },
         },
       } = data;
       if (value === CORTE1) {
-        registerPracticeModule1({ ...data, parseIntIdCurso }, idCurso, history);
+        registerPracticeModule1(
+          { ...data, parseIntIdCurso, idRecursos: ids },
+          idCurso,
+          history
+        );
       }
 
       if (value === CORTE2) {
-        registerPracticeModule2({ ...data, parseIntIdCurso }, idCurso, history);
+        registerPracticeModule2(
+          { ...data, parseIntIdCurso, idRecursos: ids },
+          idCurso,
+          history
+        );
       }
 
       if (value === CORTE3) {
-        registerPracticeModule3({ ...data, parseIntIdCurso }, idCurso, history);
+        registerPracticeModule3(
+          { ...data, parseIntIdCurso, idRecursos: ids },
+          idCurso,
+          history
+        );
       }
     };
     if (isSendForm) {
@@ -109,6 +137,13 @@ const Form = () => {
     e.value === CORTE3
       ? methods.setValue("field.tipoMuestreo", "variable")
       : methods.setValue("field.tipoMuestreo", "");
+  }
+
+  function handleDocuments(data) {
+    const ids = data.map((item) => ({
+      idRecurso: item.idRecurso,
+    }));
+    return ids;
   }
 
   return (
@@ -186,6 +221,38 @@ const Form = () => {
                 />
               )}
             />
+            <Controller
+              name="idRecursos"
+              control={methods.control}
+              rules={{ required: false }}
+              render={({ field: { onChange, name, value } }) => (
+                <MultiSelectAll
+                  asyncSelect
+                  cacheOptions
+                  loadOptions={documents}
+                  isMulti={true}
+                  defaultOptions={[...documents]}
+                  widthSelect={"20rem"}
+                  closeMenuOnSelect={false}
+                  getOptionLabel={(option) => option.nombreRecurso}
+                  getOptionValue={(option) => option.idRecurso}
+                  placeholder="Seleccionar Documentos"
+                  error={error?.field?.idRecursos}
+                  onChange={(e, option) => {
+                    onChange(e);
+                  }}
+                  name={name}
+                  value={value}
+                />
+              )}
+            />
+            <Button
+              type="button"
+              styleButton={"primary"}
+              onClick={handleModalStateDocuments}
+            >
+              Gestionar Documentos
+            </Button>
           </Row>
 
           {/* Descripción de la práctica */}
@@ -238,6 +305,11 @@ const Form = () => {
           onClick={sendFormValid}
         />
       )}
+      {/* Se muestra el modal para gestionar documentos*/}
+      <ModalDocuments
+        isOpen={isOpenDocuments}
+        close={handleModalStateDocuments}
+      />
     </>
   );
 };

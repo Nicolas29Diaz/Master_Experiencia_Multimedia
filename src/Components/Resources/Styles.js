@@ -4,7 +4,7 @@ export const DocumentContainer = styled.div`
   max-height: 50vh; /* Altura máxima para el scroll */
   overflow-y: auto; /* Habilitar el scroll vertical */
   margin: 40px auto 0 auto; /* Espacio alrededor del contenedor */
-  width: 80%;
+  width: 80vw;
   max-width: 800px;
   border-radius: 10px;
   ${scrollBarStyle} /* Agregar el estilo de la barra de desplazamiento */
@@ -20,7 +20,7 @@ export const DocumentItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 25px 15px;
+  padding: 2vw 2vw;
   background-color: #f9f9f9; /* Color de fondo */
   border-radius: 5px; /* Bordes redondeados */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
@@ -29,6 +29,10 @@ export const DocumentItem = styled.div`
     align-items: center;
     gap: 15px;
   }
+  & > * {
+    flex: 1;
+  }
+
 `;
 
 export const ButtonContainer = styled.div`

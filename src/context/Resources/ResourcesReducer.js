@@ -4,6 +4,7 @@ import {
   RESOURCES_LOADING,
   DELETE_DOCUMENT,
   POST_DOCUMENT,
+  GET_STUDENTS,
 } from "types";
 
 export default function ResourcesReducer(state, { payload, type }) {
@@ -12,7 +13,7 @@ export default function ResourcesReducer(state, { payload, type }) {
       return {
         ...state,
         documents: payload,
-        isLoading: false,
+        isloading: false,
       };
 
     case GET_VIDEOS:
@@ -24,7 +25,7 @@ export default function ResourcesReducer(state, { payload, type }) {
     case RESOURCES_LOADING:
       return {
         ...state,
-        isLoading: payload,
+        isloading: payload,
       };
     case DELETE_DOCUMENT:
       return {
@@ -37,6 +38,12 @@ export default function ResourcesReducer(state, { payload, type }) {
       return {
         ...state,
         documents: [...state.documents, payload],
+      };
+    case GET_STUDENTS:
+      return {
+        ...state,
+        students: payload,
+        isloading: false,
       };
     default:
       return state;
