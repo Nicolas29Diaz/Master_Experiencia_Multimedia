@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useForm, Controller, FormProvider } from "react-hook-form";
 //Styles
-import { FormStyle, Title, Row, ButtonActions } from "./styles";
+import { FormStyle, Title, Row } from "./styles";
 
 //Components
 import TextField from "Components/TextField";
@@ -26,7 +26,6 @@ import useResource from "hooks/useResource";
 
 //Data
 import { optionsModulos, CORTE1, CORTE2, CORTE3 } from "constants/index";
-import { func } from "prop-types";
 
 const Form = () => {
   const methods = useForm();
@@ -43,7 +42,6 @@ const Form = () => {
   // Estado que almacena temporalmente la información antes de confirmar
   // la creación de la práctica
   const [dataForm, setDataForm] = useState([]);
-  const [resources, setResources] = useState([]);
 
   const { isOpen, handleModalState } = useModal();
 
@@ -270,23 +268,21 @@ const Form = () => {
           <PracticeGroup />
 
           <Row>
-            
-              <Button
-                type="button"
-                styleButton="secondary"
-                onClick={handleExitForm}
-              >
-                Cancelar
-              </Button>
+            <Button
+              type="button"
+              styleButton="secondary"
+              onClick={handleExitForm}
+            >
+              Cancelar
+            </Button>
 
-              <Button
-                type="submit"
-                styleButton="primary"
-                disabled={numberOfGroupsWatch && !numberOfGroupsWatch.length}
-              >
-                Publicar
-              </Button>
-            
+            <Button
+              type="submit"
+              styleButton="primary"
+              disabled={numberOfGroupsWatch && !numberOfGroupsWatch.length}
+            >
+              Publicar
+            </Button>
           </Row>
         </FormStyle>
       </FormProvider>
