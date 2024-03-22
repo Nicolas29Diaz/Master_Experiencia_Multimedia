@@ -313,12 +313,22 @@ export const practice_options = [
         ...optionsNameProduct[0],
         units: 4,
         optionsProducto: { ...optionsProducto[0].contOptions[0] },
+        tolerance: 15,
+        attribute: [
+          { ...optionsProducto[0].attributes[0] },
+          { ...optionsProducto[0].attributes[1] },
+        ],
       },
       {
         id: 1,
         ...optionsNameProduct[3],
         units: 5,
         optionsProducto: { ...optionsProducto[3].contOptions[1] },
+        tolerance: 40,
+        attribute: [
+          { ...optionsProducto[3].attributes[2] },
+          { ...optionsProducto[3].attributes[1] },
+        ],
       },
     ],
   },
@@ -336,6 +346,11 @@ export const practice_options = [
         subGroup: 1,
         sizeSubGroup: 4,
         optionsProducto: { ...optionsProducto[4].contOptions[0] },
+        tolerance: 55,
+        attribute: [
+          { ...optionsProducto[4].attributes[2] },
+          { ...optionsProducto[4].attributes[0] },
+        ],
       },
       {
         id: 1,
@@ -343,6 +358,11 @@ export const practice_options = [
         subGroup: 2,
         sizeSubGroup: 5,
         optionsProducto: { ...optionsProducto[0].contOptions[2] },
+        tolerance: 60,
+        attribute: [
+          { ...optionsProducto[0].attributes[0] },
+          { ...optionsProducto[0].attributes[1] },
+        ],
       },
       {
         id: 2,
@@ -350,6 +370,11 @@ export const practice_options = [
         subGroup: 3,
         sizeSubGroup: 6,
         optionsProducto: { ...optionsProducto[0].contOptions[1] },
+        tolerance: 70,
+        attribute: [
+          { ...optionsProducto[0].attributes[0] },
+          { ...optionsProducto[0].attributes[1] },
+        ],
       },
       {
         id: 3,
@@ -357,13 +382,18 @@ export const practice_options = [
         subGroup: 4,
         sizeSubGroup: 7,
         optionsProducto: { ...optionsProducto[2].contOptions[0] },
+        tolerance: 80,
+        attribute: [
+          { ...optionsProducto[2].attributes[0] },
+          { ...optionsProducto[2].attributes[2] },
+        ],
       },
     ],
     graphics: [{ ...optionsGraficos[0] }, { ...optionsGraficos[1] }],
   },
   {
     value: "practica3",
-    label: "Práctica 3",
+    label: "Práctica Atributos",
     name: "Práctica 3",
     description: "Descripción de la práctica 3",
     products: "Productos de la práctica 3",
@@ -376,6 +406,10 @@ export const practice_options = [
         aql: { ...optionsAQL[0] },
         severity: { ...optionsSeveridad[2] },
         inspectionLevel: { ...optionsSeveridadAtributos[0] },
+        attribute: [
+          { ...optionsProducto[0].attributes[0] },
+          { ...optionsProducto[0].attributes[1] },
+        ],
       },
       {
         id: 1,
@@ -384,6 +418,10 @@ export const practice_options = [
         aql: { ...optionsAQL[1] },
         severity: { ...optionsSeveridad[1] },
         inspectionLevel: { ...optionsSeveridadAtributos[3] },
+        attribute: [
+          { ...optionsProducto[1].attributes[1] },
+          { ...optionsProducto[1].attributes[2] },
+        ],
       },
       {
         id: 2,
@@ -392,13 +430,17 @@ export const practice_options = [
         aql: { ...optionsAQL[2] },
         severity: { ...optionsSeveridad[0] },
         inspectionLevel: { ...optionsSeveridadAtributos[5] },
+        attribute: [
+          { ...optionsProducto[2].attributes[0] },
+          { ...optionsProducto[2].attributes[2] },
+        ],
       },
     ],
     typeSampling: ATRIBUTO,
   },
   {
     value: "practica3.1",
-    label: "Práctica 3.1",
+    label: "Práctica Variables",
     name: "Práctica 3.1",
     description: "Descripción de la práctica 3.1",
     products: "Productos de la práctica 3.1",
@@ -413,6 +455,7 @@ export const practice_options = [
         inspectionLevel: { ...optionsSeveridadVariable[0] },
         method: [{ ...optionsMetodo[0] }, { ...optionsMetodo[1] }],
         optionsProducto: { ...optionsProducto[2].contOptions[2] },
+        tolerance: 10,
       },
       {
         id: 1,
@@ -423,6 +466,7 @@ export const practice_options = [
         inspectionLevel: { ...optionsSeveridadVariable[4] },
         method: [{ ...optionsMetodo[1] }, { ...optionsMetodo[2] }],
         optionsProducto: { ...optionsProducto[4].contOptions[1] },
+        tolerance: 20,
       },
     ],
     typeSampling: VARIABLE,
@@ -440,6 +484,11 @@ export const practice_options = [
         ...optionsNameProduct[1],
         units: 10,
         optionsProducto: { ...optionsProducto[1].contOptions[1] },
+        tolerance: 30,
+        attribute: [
+          { ...optionsProducto[1].attributes[3] },
+          { ...optionsProducto[1].attributes[1] },
+        ],
       },
     ],
   },

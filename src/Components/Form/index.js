@@ -80,7 +80,7 @@ const Form = () => {
     /* Función que envía todos los datos del formulario */
     const handleOnSubmit = async (data) => {
       const ids = handleDocuments(data.idRecursos);
-      console.log({ ...data, parseIntIdCurso, idRecursos: ids });
+      // console.log({ ...data, parseIntIdCurso, idRecursos: ids });
       const {
         field: {
           modulo: { value },
@@ -161,12 +161,12 @@ const Form = () => {
         <FormStyle
           onSubmit={(event) => {
             methods.handleSubmit(async (values) => {
-              console.log(values);
-              //   if (isFormValid) {
-              //     handleModalState();
-              //     setDataForm(values);
-              //   }
-              //   if (isSendForm) setDataForm(values);
+              // console.log(values);
+              if (isFormValid) {
+                handleModalState();
+                setDataForm(values);
+              }
+              if (isSendForm) setDataForm(values);
             })(event);
           }}
           noValidate
