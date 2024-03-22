@@ -30,6 +30,29 @@ export const PITILLOS = "Pitillos";
 export const RANDOM = "random";
 export const CONSTANT = "constant";
 
+export const optionsNameProduct = [
+  {
+    value: "refrescos",
+    label: "Refrescos",
+  },
+  {
+    value: "arroz",
+    label: "Bolsa de arroz",
+  },
+  {
+    value: "pitillos",
+    label: "Pitillos",
+  },
+  {
+    value: "barraChocolate",
+    label: "Barra de chocolate",
+  },
+  {
+    value: "barraJabon",
+    label: "Barra de jabon",
+  },
+];
+
 export const ICONS_PRODUCTS = {
   [REFRESCOS]: <Bottle />,
   [BOLSA_ARROZ]: <Rice />,
@@ -59,29 +82,6 @@ export const optionsModulos = [
   { value: 1, label: "Corte 1" },
   { value: 2, label: "Corte 2" },
   { value: 3, label: "Corte 3" },
-];
-
-export const optionsNameProduct = [
-  {
-    value: "refrescos",
-    label: "Refrescos",
-  },
-  {
-    value: "arroz",
-    label: "Bolsa de arroz",
-  },
-  {
-    value: "pitillos",
-    label: "Pitillos",
-  },
-  {
-    value: "barraChocolate",
-    label: "Barra de chocolate",
-  },
-  {
-    value: "barraJabon",
-    label: "Barra de jabon",
-  },
 ];
 
 export const optionsProducto = [
@@ -298,3 +298,149 @@ export const PRODUCT_POSITIONS = {
       "8.54444180642712e-8m 1.990957869845495e-8m 0.9999999999999961m",
   },
 };
+
+export const practice_options = [
+  {
+    value: "practica1",
+    label: "Práctica 1",
+    name: "Práctica 1",
+    description: "Descripción de la práctica 1",
+    products: "Productos de la práctica 1",
+    module: { label: "Corte 1", value: 1 },
+    groups: [
+      {
+        id: 0,
+        ...optionsNameProduct[0],
+        units: 4,
+        optionsProducto: { ...optionsProducto[0].contOptions[0] },
+      },
+      {
+        id: 1,
+        ...optionsNameProduct[3],
+        units: 5,
+        optionsProducto: { ...optionsProducto[3].contOptions[1] },
+      },
+    ],
+  },
+  {
+    value: "practica2",
+    label: "Práctica 2",
+    name: "Práctica 2",
+    description: "Descripción de la práctica 2",
+    products: "Productos de la práctica 2",
+    module: { label: "Corte 2", value: 2 },
+    groups: [
+      {
+        id: 0,
+        ...optionsNameProduct[4],
+        subGroup: 1,
+        sizeSubGroup: 4,
+        optionsProducto: { ...optionsProducto[4].contOptions[0] },
+      },
+      {
+        id: 1,
+        ...optionsNameProduct[0],
+        subGroup: 2,
+        sizeSubGroup: 5,
+        optionsProducto: { ...optionsProducto[0].contOptions[2] },
+      },
+      {
+        id: 2,
+        ...optionsNameProduct[0],
+        subGroup: 3,
+        sizeSubGroup: 6,
+        optionsProducto: { ...optionsProducto[0].contOptions[1] },
+      },
+      {
+        id: 3,
+        ...optionsNameProduct[2],
+        subGroup: 4,
+        sizeSubGroup: 7,
+        optionsProducto: { ...optionsProducto[2].contOptions[0] },
+      },
+    ],
+    graphics: [{ ...optionsGraficos[0] }, { ...optionsGraficos[1] }],
+  },
+  {
+    value: "practica3",
+    label: "Práctica 3",
+    name: "Práctica 3",
+    description: "Descripción de la práctica 3",
+    products: "Productos de la práctica 3",
+    module: { label: "Corte 3", value: 3 },
+    groups: [
+      {
+        id: 0,
+        ...optionsNameProduct[0],
+        lot: 4,
+        aql: { ...optionsAQL[0] },
+        severity: { ...optionsSeveridad[2] },
+        inspectionLevel: { ...optionsSeveridadAtributos[0] },
+      },
+      {
+        id: 1,
+        ...optionsNameProduct[1],
+        lot: 5,
+        aql: { ...optionsAQL[1] },
+        severity: { ...optionsSeveridad[1] },
+        inspectionLevel: { ...optionsSeveridadAtributos[3] },
+      },
+      {
+        id: 2,
+        ...optionsNameProduct[2],
+        lot: 6,
+        aql: { ...optionsAQL[2] },
+        severity: { ...optionsSeveridad[0] },
+        inspectionLevel: { ...optionsSeveridadAtributos[5] },
+      },
+    ],
+    typeSampling: ATRIBUTO,
+  },
+  {
+    value: "practica3.1",
+    label: "Práctica 3.1",
+    name: "Práctica 3.1",
+    description: "Descripción de la práctica 3.1",
+    products: "Productos de la práctica 3.1",
+    module: { label: "Corte 3", value: 3 },
+    groups: [
+      {
+        id: 0,
+        ...optionsNameProduct[2],
+        lot: 10,
+        aql: { ...optionsAQL[2] },
+        severity: { ...optionsSeveridad[0] },
+        inspectionLevel: { ...optionsSeveridadVariable[0] },
+        method: [{ ...optionsMetodo[0] }, { ...optionsMetodo[1] }],
+        optionsProducto: { ...optionsProducto[2].contOptions[2] },
+      },
+      {
+        id: 1,
+        ...optionsNameProduct[4],
+        lot: 11,
+        aql: { ...optionsAQL[2] },
+        severity: { ...optionsSeveridad[1] },
+        inspectionLevel: { ...optionsSeveridadVariable[4] },
+        method: [{ ...optionsMetodo[1] }, { ...optionsMetodo[2] }],
+        optionsProducto: { ...optionsProducto[4].contOptions[1] },
+      },
+    ],
+    typeSampling: VARIABLE,
+  },
+  {
+    value: "practica4",
+    label: "Práctica 4",
+    name: "Práctica 4",
+    description: "Descripción de la práctica 4",
+    products: "Productos de la práctica 4",
+    module: { label: "Corte 1", value: 1 },
+    groups: [
+      {
+        id: 0,
+        ...optionsNameProduct[1],
+        units: 10,
+        optionsProducto: { ...optionsProducto[1].contOptions[1] },
+      },
+    ],
+  },
+];

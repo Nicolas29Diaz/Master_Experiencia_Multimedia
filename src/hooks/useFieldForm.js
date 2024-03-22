@@ -14,6 +14,7 @@ const useFieldForm = () => {
   const tipoPractica = watch("field.tipoPractica");
   const tipoMuestreo = watch("field.tipoMuestreo");
   const participantes = watch("field.participantes");
+  const selectedOption = watch("selectedOption");
 
   return {
     Controller,
@@ -25,6 +26,7 @@ const useFieldForm = () => {
     tipoMuestreo,
     participantes,
     tipoPractica,
+    selectedOption,
     useFieldArray,
     reset,
     getValues,

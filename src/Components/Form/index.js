@@ -26,9 +26,11 @@ import useResource from "hooks/useResource";
 
 //Data
 import { optionsModulos, CORTE1, CORTE2, CORTE3 } from "constants/index";
+import { practice_options } from "constants/index";
 
 const Form = () => {
   const methods = useForm();
+
   const { idCurso } = useParams();
   const history = useHistory();
   const [exitForm, setExitForm] = useState(false);
@@ -144,23 +146,53 @@ const Form = () => {
     return ids;
   }
 
+  const handleSelectChange = (selectedOption) => {
+    methods.setValue("field.nombrePractica", selectedOption.name);
+    methods.setValue("field.descripcion", selectedOption.description);
+    methods.setValue("field.modulo", selectedOption.module);
+    methods.setValue("field.participantes", students);
+    // methods.setValue("productos", selectedOption.productos);
+    // methods.setValue("modulo", "corte3");
+  };
+
   return (
     <>
       <FormProvider {...methods}>
         <FormStyle
           onSubmit={(event) => {
             methods.handleSubmit(async (values) => {
-              if (isFormValid) {
-                handleModalState();
-                setDataForm(values);
-              }
-              if (isSendForm) setDataForm(values);
+              console.log(values);
+              //   if (isFormValid) {
+              //     handleModalState();
+              //     setDataForm(values);
+              //   }
+              //   if (isSendForm) setDataForm(values);
             })(event);
           }}
           noValidate
         >
           <Title>Configurar nueva práctica</Title>
           <Row>
+            <Controller
+              name="selectedOption"
+              control={methods.control}
+              rules={{ required: false }}
+              // defaultValue={practice_options[0]}
+              render={({ field }) => (
+                <MultiSelectAll
+                  {...field}
+                  isMulti={false}
+                  widthSelect={"9rem"}
+                  options={practice_options}
+                  placeholder="Prácticas predeterminadas"
+                  error={error?.modulo}
+                  onChange={(selectedOption) => {
+                    field.onChange(selectedOption);
+                    handleSelectChange(selectedOption);
+                  }}
+                />
+              )}
+            />
             <TextField
               type="text"
               placeholder="Nombre de la práctica"
@@ -180,6 +212,10 @@ const Form = () => {
                   options={optionsModulos}
                   placeholder="Módulo"
                   error={error.field?.modulo}
+                  value={optionsModulos.find(
+                    (modulo) =>
+                      modulo.value === methods.getValues("field.modulo")?.value
+                  )} // Seleccionar automáticamente el módulo correspondiente al valor del campo modulo
                   onChange={(e) => {
                     onChange(e);
                     handleTipoMuestreo(e);
@@ -236,7 +272,7 @@ const Form = () => {
                   getOptionValue={(option) => option.idRecurso}
                   placeholder="Documentos para la práctica"
                   error={error?.field?.idRecursos}
-                  onChange={(e, option) => {
+                  onChange={(e) => {
                     onChange(e);
                   }}
                   name={name}

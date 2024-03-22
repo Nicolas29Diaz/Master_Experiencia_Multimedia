@@ -11,14 +11,24 @@ import GenerateProductGroup from "Components/Groups/GenerateProductGroup";
 import Button from "Components/Button";
 
 import { CORTE2, CORTE3 } from "constants/index";
+import { useEffect } from "react";
 
 const PracticeGroup = () => {
-  const { control, modulo, useFieldArray } = useFieldForm();
+  const { control, modulo, selectedOption, useFieldArray } = useFieldForm();
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "groups",
   });
+
+  useEffect(() => {
+    remove();
+    selectedOption?.groups.map((item) => {
+      append({ producto: "" });
+      return "";
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedOption]);
 
   return (
     <>

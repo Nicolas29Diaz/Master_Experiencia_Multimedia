@@ -6,10 +6,19 @@ import RadioButton from "Components/RadioButton";
 import MultiSelectAll from "Components/MultiSelectAll";
 
 import { Validations } from "Validations/Validation";
+import { useEffect } from "react";
 
 const Courses = ({ course }) => {
-  const { Controller, control, register, errors } = useFieldForm();
+  const { Controller, control, register, errors, selectedOption, setValue } =
+    useFieldForm();
   const { validationField } = Validations();
+
+  useEffect(() => {
+    course === CORTE2 && setValue("field.graficos", selectedOption?.graphics);
+    course === CORTE3 &&
+      setValue("field.tipoMuestreo", selectedOption?.typeSampling);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedOption]);
 
   const Course2 = () => (
     <Row>

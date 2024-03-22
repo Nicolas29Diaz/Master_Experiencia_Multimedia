@@ -17,6 +17,7 @@ import {
   SIZE_FIELD,
   VARIABLE,
 } from "constants/index";
+import { useEffect } from "react";
 
 const SelectedProductGroup = ({ selectedProduct, id }) => {
   const {
@@ -29,6 +30,8 @@ const SelectedProductGroup = ({ selectedProduct, id }) => {
     setValue,
     participantes,
     watch,
+    // getValues,
+    selectedOption,
   } = useFieldForm();
 
   const { validationField } = Validations();
@@ -43,6 +46,11 @@ const SelectedProductGroup = ({ selectedProduct, id }) => {
       ...(filterNames ?? []).slice(id + 1),
     ]);
   }
+
+  useEffect(() => {
+    setValue(`groups.${id}.cont`, selectedOption.groups[id].optionsProducto);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return optionsProducto
     .filter((product) => product.label === selectedProduct)
