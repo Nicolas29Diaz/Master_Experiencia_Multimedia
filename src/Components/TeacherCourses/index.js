@@ -41,7 +41,7 @@ const TeacherCourses = () => {
                 setShowModal(true);
                 handleModalStateR();
               },
-              text: "Recursos",
+              text: "Gestionar",
             },
             {
               style: "secondary",

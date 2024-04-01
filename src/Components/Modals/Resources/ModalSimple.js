@@ -10,11 +10,14 @@ function ModalSimple({
   description,
   buttons = [],
   children,
+  alignTitle = true,
 }) {
   return (
     <Modal isOpen={isOpen} close={close}>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {title && <h1 style={{ textAlign: "center" }}>{title}</h1>}
+        {title && (
+          <h1 style={{ textAlign: alignTitle ? "center" : "left" }}>{title}</h1>
+        )}
         {description && <p>{description}</p>}
         {children}
         {buttons.length > 0 && (

@@ -80,7 +80,8 @@ const Form = () => {
     /* Función que envía todos los datos del formulario */
     const handleOnSubmit = async (data) => {
       const ids = handleDocuments(data.idRecursos);
-      // console.log({ ...data, parseIntIdCurso, idRecursos: ids });
+      // console.log(ids)
+      console.log({ ...data, parseIntIdCurso, idRecursos: ids });
       const {
         field: {
           modulo: { value },
@@ -140,16 +141,20 @@ const Form = () => {
   }
 
   function handleDocuments(data) {
-    const ids = data.map((item) => ({
-      idRecurso: item.idRecurso,
-    }));
+
+    let ids = [];
+    data !== undefined &&
+      (ids = data?.map((item) => ({
+        idRecurso: item.idRecurso,
+      })));
+
     return ids;
   }
 
   const handleSelectChange = (selectedOption) => {
-    methods.setValue("field.nombrePractica", selectedOption.name);
-    methods.setValue("field.descripcion", selectedOption.description);
-    methods.setValue("field.modulo", selectedOption.module);
+    methods.setValue("field.nombrePractica", selectedOption?.name);
+    methods.setValue("field.descripcion", selectedOption?.description);
+    methods.setValue("field.modulo", selectedOption?.module);
     methods.setValue("field.participantes", students);
     // methods.setValue("productos", selectedOption.productos);
     // methods.setValue("modulo", "corte3");

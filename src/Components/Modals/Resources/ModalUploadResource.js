@@ -9,6 +9,7 @@ const ModalUploadResource = ({ isOpen, close }) => {
   const [upload, setUpload] = useState(false);
   const inputRef = useRef(null);
   const [indexButtons, setIndexButtons] = useState(0);
+
   const buttons = [
     [
       {
@@ -59,7 +60,9 @@ const ModalUploadResource = ({ isOpen, close }) => {
   };
 
   const resourceSelected = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    // console.log("Tipo de archivo correcto");
+    setFile(selectedFile);
     setIndexButtons(1);
   };
 
@@ -69,7 +72,6 @@ const ModalUploadResource = ({ isOpen, close }) => {
         file: file,
         name: file.name,
       };
-
       postDocuments(data);
       cleanInput();
     } catch (error) {

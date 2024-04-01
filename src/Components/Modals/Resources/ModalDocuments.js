@@ -6,7 +6,6 @@ import {
   DocumentItem,
   ButtonContainer,
 } from "Components/Resources/Styles";
-import Button from "Components/Button";
 import { useEffect } from "react";
 import { useState } from "react";
 import useResource from "hooks/useResource";
@@ -14,7 +13,9 @@ import Loading from "Components/Loading";
 import useModal from "hooks/useModal";
 import ModalUploadResource from "./ModalUploadResource";
 import ShowMessageToCreate from "Components/ShowMessageToCreate";
-
+import { Delete } from "Icons/Delete";
+import View from "Icons/View";
+import { ButtonActionVariant } from "Components/CardCourseItem/styles";
 function ModalDocuments({ isOpen, close }) {
   const { isloading, documents, getDocuments, deleteDocuments } = useResource();
 
@@ -56,14 +57,14 @@ function ModalDocuments({ isOpen, close }) {
         ) : (
           <DocumentContainer>
             <DocumentGrid>
-              {documents.length > 0 ? (
+              {documents?.length > 0 ? (
                 documents.map((item) => (
                   <DocumentItem key={item.idRecurso}>
-                    <span>{item.nombreRecurso}</span>
-                    <ButtonContainer>
-                      <Button
-                        type="button"
-                        styleButton="delete"
+                    <span style={{ flex: "2" }}>{item.nombreRecurso}</span>
+                    <ButtonContainer style={{ flex: "1" }}>
+                      <ButtonActionVariant
+                        colorHover="delete"
+                        fillColor="white"
                         onClick={() => {
                           setInfoRecurso({
                             nombreRecurso: item.nombreRecurso,
@@ -72,15 +73,16 @@ function ModalDocuments({ isOpen, close }) {
                           handleModalStateDelete();
                         }}
                       >
-                        Eliminar
-                      </Button>
-                      <Button
-                        type="button"
-                        styleButton="primary"
+                        <Delete />
+                      </ButtonActionVariant>
+                      <ButtonActionVariant
+                        colorHover="primary"
+                        fillColor="white"
+                        stroke="white"
                         onClick={() => window.open(item.urlRecurso, "_blank")}
                       >
-                        Visualizar
-                      </Button>
+                        <View />
+                      </ButtonActionVariant>
                     </ButtonContainer>
                   </DocumentItem>
                 ))

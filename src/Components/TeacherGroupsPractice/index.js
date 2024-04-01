@@ -22,6 +22,8 @@ const TeacherGroupsPractice = () => {
   } = useTeacher();
 
   useEffect(() => {
+    console.log(practiceSelected);
+
     if (practiceSelected === "practice1") {
       getGroupsPractice1(Number(idPractica));
     }

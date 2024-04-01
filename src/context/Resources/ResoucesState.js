@@ -145,6 +145,99 @@ function ResoucesState({ children }) {
     }
   };
 
+  const deleteStudent = async (data) => {
+    // Mostrar toast de carga
+    const loadingToastId = toast.loading("Eliminando estudiante...");
+    console.log(data);
+    try {
+      // Eliminar el documento de la API
+      await axiosClient.delete(`/api/estudiante/${data.idRecurso}`);
+
+      // Se actualiza el estado y se muestra un toast de éxito
+      dispatch({
+        type: "DELETE_STUDENT",
+        payload: data.idRecurso,
+      });
+      // Cerrar el toast de carga
+      toast.dismiss(loadingToastId);
+      toast.success("Estudiante eliminado con éxito");
+    } catch (error) {
+      // Si hay un error al eliminar el documento de la API, se captura y se maneja
+      console.error("Error al eliminar el estudiante:", error);
+      // Cerrar el toast de carga
+      toast.dismiss(loadingToastId);
+      toast.error("Error al eliminar el estudiante");
+    }
+  };
+
+  const deleteAllStudents = async () => {
+    // Mostrar toast de carga
+    const loadingToastId = toast.loading("Eliminando estudiantes...");
+
+    try {
+      // Eliminar el documento de la API
+      await axiosClient.delete(`/api/estudiante/`);
+
+      // Se actualiza el estado y se muestra un toast de éxito
+      dispatch({
+        type: "DELETE_STUDENTS",
+        payload: [],
+      });
+      // Cerrar el toast de carga
+      toast.dismiss(loadingToastId);
+      toast.success("Estudiantes eliminados con éxito");
+    } catch (error) {
+      // Si hay un error al eliminar el documento de la API, se captura y se maneja
+      console.error("Error al eliminar los estudiantes:", error);
+      // Cerrar el toast de carga
+      toast.dismiss(loadingToastId);
+      toast.error("Error al eliminar los estudiantes");
+    }
+  };
+
+  const postStudents = async (data) => {
+    // Mostrar toast de carga
+    const loadingToastId = toast.loading("Registrando estudiantes...");
+
+    // Verificar si hay algún estudiante con el mismo id en ambos arrays
+    for (const dataStudent of data) {
+      let found = false;
+      let id = "";
+      for (const stateStudent of state.students) {
+        if (dataStudent.id === stateStudent.idEstudiante + "") {
+          found = true;
+          id = dataStudent.id;
+          break;
+        }
+      }
+      if (found) {
+        toast.dismiss(loadingToastId);
+        toast.error(`Ya ha sido registrado un estudiante con el código ${id}.`);
+        return;
+      }
+    }
+
+    try {
+      await axiosClient.post(`/api/usuario/registerAll`, data);
+
+      // dispatch({
+      //   type: "POST_STUDENTS",
+      //   payload: response.data.response,
+      // });
+
+      getStudents();
+
+      toast.dismiss(loadingToastId);
+      toast.success("Estudiantes registrados con éxito");
+    } catch (error) {
+      // Si hay un error al eliminar el documento de la API, se captura y se maneja
+      console.error("Error al registrar los estudiantes:", error);
+      // Cerrar el toast de carga
+      toast.dismiss(loadingToastId);
+      toast.error("Error al registrar los estudiantes");
+    }
+  };
+
   const changeVideo = () => {};
 
   return (
@@ -154,12 +247,15 @@ function ResoucesState({ children }) {
         documents: state.documents,
         students: state.students,
         isloading: state.isloading,
+        deleteStudent,
         getVideos,
         getDocuments,
         postDocuments,
         deleteDocuments,
         changeVideo,
         getStudents,
+        deleteAllStudents,
+        postStudents,
       }}
     >
       {children}

@@ -48,9 +48,9 @@ const SelectedProductGroup = ({ selectedProduct, id }) => {
   }
 
   useEffect(() => {
-    setValue(`groups.${id}.cont`, selectedOption.groups[id].optionsProducto);
-    setValue(`groups.${id}.tolerancia`, selectedOption.groups[id].tolerance);
-    setValue(`groups.${id}.atributos`, selectedOption.groups[id].attribute);
+    setValue(`groups.${id}.cont`, selectedOption?.groups[id]?.optionsProducto);
+    setValue(`groups.${id}.tolerancia`, selectedOption?.groups[id]?.tolerance);
+    setValue(`groups.${id}.atributos`, selectedOption?.groups[id]?.attribute);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -39,25 +39,24 @@ const CoursesGroup = ({ coursesGroup, id }) => {
 
   useEffect(() => {
     coursesGroup === CORTE1 &&
-      setValue(`groups.${id}.unidades`, selectedOption.groups[id]?.units);
+      setValue(`groups.${id}.unidades`, selectedOption?.groups[id]?.units);
 
     coursesGroup === CORTE2 &&
-      setValue(`groups.${id}.subgrupo`, selectedOption.groups[id]?.subGroup);
+      setValue(`groups.${id}.subgrupo`, selectedOption?.groups[id]?.subGroup);
     setValue(
       `groups.${id}.tamanioSubgrupo`,
-      selectedOption.groups[id]?.sizeSubGroup
+      selectedOption?.groups[id]?.sizeSubGroup
     );
     if (coursesGroup === CORTE3) {
-      setValue(`groups.${id}.lote`, selectedOption.groups[id]?.lot);
-      setValue(`groups.${id}.aql`, { ...selectedOption.groups[id]?.aql });
-      setValue(`groups.${id}.severidad`, {
-        ...selectedOption.groups[id]?.severity,
-      });
-      setValue(`groups.${id}.nivelInspeccion`, {
-        ...selectedOption.groups[id]?.inspectionLevel,
-      });
+      setValue(`groups.${id}.lote`, selectedOption?.groups[id]?.lot);
+      setValue(`groups.${id}.aql`, selectedOption?.groups[id]?.aql);
+      setValue(`groups.${id}.severidad`, selectedOption?.groups[id]?.severity);
+      setValue(
+        `groups.${id}.nivelInspeccion`,
+        selectedOption?.groups[id]?.inspectionLevel
+      );
       tipoMuestreo === VARIABLE &&
-        setValue(`groups.${id}.metodo`, selectedOption.groups[id]?.method);
+        setValue(`groups.${id}.metodo`, selectedOption?.groups[id]?.method);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -132,9 +131,9 @@ const CoursesGroup = ({ coursesGroup, id }) => {
             placeholder="AQL"
             options={optionsAQL}
             error={errors?.groups?.[id]?.aql}
-            value={optionsAQL.find(
-              (option) => option.value === getValues(`groups.${id}.aql`)?.value
-            )}
+            // value={optionsAQL?.find(
+            //   (option) => option.value === getValues(`groups.${id}.aql`)?.value
+            // )}
             {...field}
           />
         )}

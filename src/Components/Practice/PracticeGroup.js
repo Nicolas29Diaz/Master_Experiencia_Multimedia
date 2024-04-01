@@ -23,7 +23,7 @@ const PracticeGroup = () => {
 
   useEffect(() => {
     remove();
-    selectedOption?.groups.map((item) => {
+    selectedOption?.groups?.map((item) => {
       append({ producto: "" });
       return "";
     });

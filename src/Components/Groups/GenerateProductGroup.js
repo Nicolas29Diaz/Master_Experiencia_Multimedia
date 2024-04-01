@@ -26,7 +26,7 @@ const GenerateProductGroup = ({ id }) => {
   const { validationField } = Validations();
 
   useEffect(() => {
-    selectedOption?.groups.find((gruop) => {
+    selectedOption?.groups?.find((gruop) => {
       gruop.id === id &&
         setValue(`groups.${id}.producto`, {
           value: gruop.value,

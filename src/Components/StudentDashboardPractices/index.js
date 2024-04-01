@@ -17,7 +17,9 @@ import useProgressBar from "hooks/useProgressBar";
 import Loading from "Components/Loading";
 import ShowMessageToCreate from "Components/ShowMessageToCreate";
 import { ICONS_PRODUCTS } from "constants/index";
-
+import ModalDocumentsStudent from "Components/Modals/Resources/ModalDocumentsStudent";
+import useModal from "hooks/useModal";
+import { useState } from "react";
 const StudentDashboardPractices = () => {
   const { user, userAuthenticate } = useAuth();
   const {
@@ -35,6 +37,8 @@ const StudentDashboardPractices = () => {
     useProduct();
   const history = useHistory();
   const { pathname } = useLocation();
+  const { isOpen, handleModalState } = useModal();
+  const [recurso, setRecurso] = useState();
 
   useEffect(() => {
     userAuthenticate();
@@ -69,6 +73,7 @@ const StudentDashboardPractices = () => {
       corte: idCorte,
       estudiante: `${user?.estudiante.nombreEstudiante} ${user?.estudiante.apellidoEstudiante}`,
       url: `${pathname}/dashboard/${idPractica}/corte-${idCorte}`,
+      urlVideo: "https://VideoFireBase",
     };
     getPracticeId(idPractica);
     if (idCorte === 1) {
@@ -110,64 +115,89 @@ const StudentDashboardPractices = () => {
   };
 
   return (
-    <Dashboard titleHeader="Prácticas asignadas">
-      {isloading ? (
-        <Loading />
-      ) : (
-        <>
-          {!practicesStudent.length && (
-            <ShowMessageToCreate text="Parece que aún no tienes ninguna práctica asignada ¡Yuju!" />
-          )}
-          <StudentPracticesContainer practicesStudent={practicesStudent}>
-            {practicesStudent.length > 0 &&
-              practicesStudent.map(
-                ({
-                  id,
-                  nombrePractica,
-                  nombreProducto,
-                  descripcion,
-                  fecha,
-                  estado,
-                  idCorte,
-                }) => (
-                  <CardContainer key={id}>
-                    <BackgrounImage>
-                      {ICONS_PRODUCTS[nombreProducto]}
-                    </BackgrounImage>
-                    <CardInfo>
-                      <h1>{nombrePractica}</h1>
-                      <p>Producto: {nombreProducto}</p>
-                      <p>F. Publicación: {fecha}</p>
-                      <StateCard estado={estado}>{estado}</StateCard>
-                    </CardInfo>
-                    <ActionButtonContainer>
-                      <Button
-                        type="button"
-                        styleButton="primary"
-                        onClick={() => {
-                          estado === "Realizada"
-                            ? handleRedirectoResults(id, idCorte)
-                            : handleRedirectoPractice({
-                                nombrePractica,
-                                idPractica: id,
-                                idCorte,
-                                nombreProducto,
-                                descripcion,
-                              });
-                        }}
-                      >
-                        {estado === "Realizada"
-                          ? "Ver resultados"
-                          : "Iniciar práctica"}
-                      </Button>
-                    </ActionButtonContainer>
-                  </CardContainer>
-                )
-              )}
-          </StudentPracticesContainer>
-        </>
-      )}
-    </Dashboard>
+    <>
+      <Dashboard titleHeader="Prácticas asignadas">
+        {isloading ? (
+          <Loading />
+        ) : (
+          <>
+            {!practicesStudent.length && (
+              <ShowMessageToCreate text="Parece que aún no tienes ninguna práctica asignada ¡Yuju!" />
+            )}
+            <StudentPracticesContainer practicesStudent={practicesStudent}>
+              {practicesStudent.length > 0 &&
+                practicesStudent.map(
+                  ({
+                    id,
+                    nombrePractica,
+                    nombreProducto,
+                    descripcion,
+                    fecha,
+                    estado,
+                    idCorte,
+                    recursos,
+                  }) => (
+                    <CardContainer key={id}>
+                      <BackgrounImage>
+                        {ICONS_PRODUCTS[nombreProducto]}
+                      </BackgrounImage>
+                      <CardInfo>
+                        <h1>{nombrePractica}</h1>
+                        <p>Producto: {nombreProducto}</p>
+                        <p>F. Publicación: {fecha}</p>
+                        <StateCard estado={estado}>{estado}</StateCard>
+                      </CardInfo>
+                      <div style={{ display: "flex", flexDirection: "column" }}>
+                        <ActionButtonContainer>
+                          <Button
+                            style={{ margin: "10px 0px" }}
+                            type="button"
+                            styleButton="primary"
+                            onClick={() => {
+                              estado === "Realizada"
+                                ? handleRedirectoResults(id, idCorte)
+                                : handleRedirectoPractice({
+                                    nombrePractica,
+                                    idPractica: id,
+                                    idCorte,
+                                    nombreProducto,
+                                    descripcion,
+                                  });
+                            }}
+                          >
+                            {estado === "Realizada"
+                              ? "Ver resultados"
+                              : "Iniciar práctica"}
+                          </Button>
+                          <Button
+                            type="button"
+                            styleButton="primary"
+                            onClick={() => {
+                              setRecurso(recursos);
+                              handleModalState();
+                            }}
+                          >
+                            Documentos
+                          </Button>
+                        </ActionButtonContainer>
+                      </div>
+                      {/* <ActionButtonContainer>
+                    
+                    </ActionButtonContainer> */}
+                    </CardContainer>
+                  )
+                )}
+            </StudentPracticesContainer>
+          </>
+        )}
+      </Dashboard>
+
+      <ModalDocumentsStudent
+        isOpen={isOpen}
+        close={handleModalState}
+        recursos={recurso}
+      />
+    </>
   );
 };
 

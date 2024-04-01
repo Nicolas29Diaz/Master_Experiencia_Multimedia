@@ -14,7 +14,7 @@ export const StudentPracticesContainer = styled.main`
 
 export const CardContainer = styled.article`
   width: 244px;
-  height: 320px;
+  height: 350px;
   background-color: ${Colors.white};
   border-radius: 20px;
   border: 2px solid ${Colors.default};
@@ -28,7 +28,7 @@ export const CardContainer = styled.article`
 
 export const BackgrounImage = styled.div`
   width: 100%;
-  height: 40%;
+  height: 35%;
   background-color: ${Colors.primary};
   border-radius: 20px 20px 0 0;
   text-align: center;

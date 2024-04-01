@@ -48,3 +48,24 @@ export const ButtonContainer = styled.div`
     gap: 15px;
   }
 `;
+
+
+export const StudentContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2vw 2vw;
+  background-color: #f9f9f9; /* Color de fondo */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+  min-height:100px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  & > * {
+    flex: 1;
+  }
+
+`;

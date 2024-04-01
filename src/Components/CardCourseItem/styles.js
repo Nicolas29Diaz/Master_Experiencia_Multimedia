@@ -65,3 +65,32 @@ export const ButtonAction = styled.button`
     fill: ${Colors.white};
   }
 `;
+
+export const ButtonActionVariant = styled.button`
+  padding: 0.5rem 0.4rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+
+
+  &:hover {
+    background-color: ${(props) => {
+      switch (props.colorHover) {
+        case "primary":
+          return Colors.primary;
+        case "delete":
+          return Colors.delete;
+        case "secondary":
+          return Colors.secondary;
+        default:
+          return Colors.default;
+      }
+    }};
+    fill: ${(props) => props.fillColor};
+    
+    svg {
+      path {
+        stroke: ${(props) => props.stroke};
+  }
+`;

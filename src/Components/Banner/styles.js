@@ -29,3 +29,22 @@ export const ItemBanner = styled.li`
     font-weight: normal;
   }
 `;
+
+export const DocsBanner = styled.div`
+  padding: 0.2rem 0;
+
+  font-weight: bold;
+  span {
+    font-weight: normal;
+  }
+`;
+
+export const DocItemBanner = styled.li`
+  margin: 5px 0px 6px 20px;
+  font-weight: normal;
+  list-style-type: disc;
+  a {
+    color: inherit;
+  
+  }
+`;

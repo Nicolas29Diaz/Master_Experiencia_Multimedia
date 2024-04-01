@@ -13,6 +13,9 @@ export default function useResource() {
     deleteDocuments,
     changeVideo,
     getStudents,
+    deleteStudent,
+    deleteAllStudents,
+    postStudents,
   } = useContext(ResourceContext);
 
   return {
@@ -26,5 +29,8 @@ export default function useResource() {
     deleteDocuments,
     changeVideo,
     getStudents,
+    deleteStudent,
+    deleteAllStudents,
+    postStudents,
   };
 }

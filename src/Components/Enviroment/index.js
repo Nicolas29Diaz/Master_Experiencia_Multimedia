@@ -16,6 +16,9 @@ const Enviroment = ({ location }) => {
   const { changeStateMessage } = useProduct();
   const { isOpen, handleModalState } = useModal();
 
+  // const url = "http://127.0.0.1:5501";
+  const url = "https://melodious-horse-18ea10.netlify.app"
+
   useEffect(() => {
     userAuthenticate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,7 +27,7 @@ const Enviroment = ({ location }) => {
   // Lo que recibo
   useEffect(() => {
     window.addEventListener("message", function (e) {
-      if (e.origin !== "https://melodious-horse-18ea10.netlify.app") return;
+      if (e.origin !== url) return;
 
       if (e.data === "Abort") {
         handleModalState();
@@ -33,11 +36,12 @@ const Enviroment = ({ location }) => {
       if (e.data === "openedReady") {
         iFrameRef.current?.contentWindow.postMessage(
           JSON.stringify(location.state),
-          "https://melodious-horse-18ea10.netlify.app"
+          url
         );
       }
 
       if (e.data !== "openedReady") {
+        console.log(e.data);
         if (modulo === CORTE3) {
           changeStateMessage(true);
           history.push(e.data);
@@ -58,7 +62,7 @@ const Enviroment = ({ location }) => {
           title="Entorno"
           frameBorder={0}
           allowFullScreen
-          src="https://melodious-horse-18ea10.netlify.app"
+          src={url}
         />
       </ContainerIframe>
 

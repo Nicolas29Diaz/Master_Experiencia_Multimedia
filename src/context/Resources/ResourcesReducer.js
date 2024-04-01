@@ -5,6 +5,9 @@ import {
   DELETE_DOCUMENT,
   POST_DOCUMENT,
   GET_STUDENTS,
+  DELETE_STUDENT,
+  DELETE_STUDENTS,
+  POST_STUDENTS,
 } from "types";
 
 export default function ResourcesReducer(state, { payload, type }) {
@@ -44,6 +47,23 @@ export default function ResourcesReducer(state, { payload, type }) {
         ...state,
         students: payload,
         isloading: false,
+      };
+    case DELETE_STUDENT:
+      return {
+        ...state,
+        students: state.students.filter(
+          (student) => student.idEstudiante !== payload
+        ),
+      };
+    case DELETE_STUDENTS:
+      return {
+        ...state,
+        students: payload,
+      };
+    case POST_STUDENTS:
+      return {
+        ...state,
+        students: [...state.students, payload],
       };
     default:
       return state;

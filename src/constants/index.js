@@ -343,7 +343,7 @@ export const practice_options = [
       {
         id: 0,
         ...optionsNameProduct[4],
-        subGroup: 1,
+        subGroup: 4,
         sizeSubGroup: 4,
         optionsProducto: { ...optionsProducto[4].contOptions[0] },
         tolerance: 55,
@@ -355,8 +355,8 @@ export const practice_options = [
       {
         id: 1,
         ...optionsNameProduct[0],
-        subGroup: 2,
-        sizeSubGroup: 5,
+        subGroup: 4,
+        sizeSubGroup: 4,
         optionsProducto: { ...optionsProducto[0].contOptions[2] },
         tolerance: 60,
         attribute: [
@@ -367,8 +367,8 @@ export const practice_options = [
       {
         id: 2,
         ...optionsNameProduct[0],
-        subGroup: 3,
-        sizeSubGroup: 6,
+        subGroup: 4,
+        sizeSubGroup: 4,
         optionsProducto: { ...optionsProducto[0].contOptions[1] },
         tolerance: 70,
         attribute: [
@@ -380,7 +380,7 @@ export const practice_options = [
         id: 3,
         ...optionsNameProduct[2],
         subGroup: 4,
-        sizeSubGroup: 7,
+        sizeSubGroup: 4,
         optionsProducto: { ...optionsProducto[2].contOptions[0] },
         tolerance: 80,
         attribute: [
