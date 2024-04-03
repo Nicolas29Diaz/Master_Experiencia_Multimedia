@@ -141,7 +141,6 @@ const Form = () => {
   }
 
   function handleDocuments(data) {
-
     let ids = [];
     data !== undefined &&
       (ids = data?.map((item) => ({
@@ -156,8 +155,6 @@ const Form = () => {
     methods.setValue("field.descripcion", selectedOption?.description);
     methods.setValue("field.modulo", selectedOption?.module);
     methods.setValue("field.participantes", students);
-    // methods.setValue("productos", selectedOption.productos);
-    // methods.setValue("modulo", "corte3");
   };
 
   return (
@@ -166,7 +163,7 @@ const Form = () => {
         <FormStyle
           onSubmit={(event) => {
             methods.handleSubmit(async (values) => {
-               console.log(values);
+              console.log(values);
               if (isFormValid) {
                 handleModalState();
                 setDataForm(values);

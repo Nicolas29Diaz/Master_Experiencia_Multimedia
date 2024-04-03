@@ -10,32 +10,24 @@ import CoursesGroup from "./CoursesGroup";
 import { CORTE1, CORTE2, optionsNameProduct } from "constants/index";
 // Validations
 import { Validations } from "Validations/Validation";
-import { useEffect } from "react";
 
 const GenerateProductGroup = ({ id }) => {
-  const {
-    Controller,
-    watch,
-    modulo,
-    errors,
-    selectedOption,
-    setValue,
-    getValues,
-  } = useFieldForm();
+  const { Controller, watch, modulo, errors } = useFieldForm();
   const selectedProduct = watch(`groups.${id}.producto`);
   const { validationField } = Validations();
 
-  useEffect(() => {
-    selectedOption?.groups?.find((group) => {
-      group.id === id &&
-        setValue(`groups.${id}.producto`, {
-          value: group.value,
-          label: group.label,
-        });
-      return "";
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedOption]);
+  // useEffect(() => {
+  //   // console.log("Group")
+  //   selectedOption?.groups?.find((group) => {
+  //     group.id === id &&
+  //       setValue(`groups.${id}.producto`, {
+  //         value: group.value,
+  //         label: group.label,
+  //       });
+  //     return "";
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [selectedOption]);
 
   return (
     <Fragment key={id}>
