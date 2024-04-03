@@ -62,7 +62,10 @@ const PracticeGroup = () => {
                     <Button
                       type="button"
                       styleButton="delete"
-                      onClick={() => remove(index)}
+                      onClick={() => {
+                        console.log(index);
+                        remove(index);
+                      }}
                     >
                       Eliminar
                     </Button>

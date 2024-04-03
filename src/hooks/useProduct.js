@@ -28,8 +28,8 @@ const useProduct = () => {
     (rev) => rev?.id === selectedSubgroup?.id
   );
 
-  const counterRejected = rejected === [] ? 0 : rejected.length;
-  const counterAccepted = accepted === [] ? 0 : accepted.length;
+  const counterRejected = rejected == [] ? 0 : rejected.length; //SE MODIFICAN LOS === por ==
+  const counterAccepted = accepted == [] ? 0 : accepted.length;
 
   const deleteSelectedItem = (index, array) =>
     array.filter((item) => item !== index);

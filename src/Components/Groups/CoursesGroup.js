@@ -60,7 +60,7 @@ const CoursesGroup = ({ coursesGroup, id }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedOption]);
 
   const Corte1 = () => (
     <TextField

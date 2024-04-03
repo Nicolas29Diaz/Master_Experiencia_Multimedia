@@ -166,7 +166,7 @@ const Form = () => {
         <FormStyle
           onSubmit={(event) => {
             methods.handleSubmit(async (values) => {
-              // console.log(values);
+               console.log(values);
               if (isFormValid) {
                 handleModalState();
                 setDataForm(values);

@@ -8,6 +8,7 @@ import {
   DELETE_STUDENT,
   DELETE_STUDENTS,
   POST_STUDENTS,
+  POST_VIDEOS,
 } from "types";
 
 export default function ResourcesReducer(state, { payload, type }) {
@@ -23,8 +24,18 @@ export default function ResourcesReducer(state, { payload, type }) {
       return {
         ...state,
         videos: payload,
+        isloading: false,
       };
-
+    case POST_VIDEOS:
+      return {
+        ...state,
+        videos: state.videos.map((video) => {
+          if (video.nombreRecurso === payload.nombreRecurso) {
+            video.urlRecurso = payload.urlRecurso;
+          }
+          return video;
+        }),
+      };
     case RESOURCES_LOADING:
       return {
         ...state,

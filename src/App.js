@@ -23,7 +23,7 @@ import Students from "Components/Resources/Students";
 import Videos from "Components/Resources/Videos";
 import Documents from "Components/Resources/Documents";
 
-import ResoucesState from "context/Resources/ResoucesState";
+import ResoucesState from "context/Resources/ResourcesState";
 // Revisar si tenemos token
 const token = localStorage.getItem("token");
 

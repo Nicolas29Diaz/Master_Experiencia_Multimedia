@@ -26,16 +26,16 @@ const GenerateProductGroup = ({ id }) => {
   const { validationField } = Validations();
 
   useEffect(() => {
-    selectedOption?.groups?.find((gruop) => {
-      gruop.id === id &&
+    selectedOption?.groups?.find((group) => {
+      group.id === id &&
         setValue(`groups.${id}.producto`, {
-          value: gruop.value,
-          label: gruop.label,
+          value: group.value,
+          label: group.label,
         });
       return "";
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedOption]);
 
   return (
     <Fragment key={id}>
@@ -49,10 +49,10 @@ const GenerateProductGroup = ({ id }) => {
             options={optionsNameProduct}
             placeholder="Seleccionar producto"
             error={errors?.groups?.[id]?.producto}
-            value={optionsNameProduct.find(
-              (product) =>
-                product.value === getValues(`groups.${id}.producto`)?.value
-            )} // Seleccionar automáticamente el módulo correspondiente al valor del campo modulo
+            // value={optionsNameProduct.find(
+            //   (product) =>
+            //     product.value === getValues(`groups.${id}.producto`)?.value
+            // )} // Seleccionar automáticamente el módulo correspondiente al valor del campo modulo
             {...field}
           />
         )}

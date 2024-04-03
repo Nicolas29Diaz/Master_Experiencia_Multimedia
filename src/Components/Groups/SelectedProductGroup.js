@@ -46,14 +46,25 @@ const SelectedProductGroup = ({ selectedProduct, id }) => {
       ...(filterNames ?? []).slice(id + 1),
     ]);
   }
+  useEffect(() => {
+    // console.log("selectedProduct");
+    const res = optionsProducto
+      .filter((product) => product.label === selectedProduct)
+      .map((productSelected) => {
+        setValue(`groups.${id}.cont`, productSelected.contOptions[0]);
+        setValue(`groups.${id}.atributos`, productSelected.attributes[0]);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedProduct]);
 
   useEffect(() => {
+    // console.log("selectedOption");
     setValue(`groups.${id}.cont`, selectedOption?.groups[id]?.optionsProducto);
     setValue(`groups.${id}.tolerancia`, selectedOption?.groups[id]?.tolerance);
     setValue(`groups.${id}.atributos`, selectedOption?.groups[id]?.attribute);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedOption]);
 
   return optionsProducto
     .filter((product) => product.label === selectedProduct)

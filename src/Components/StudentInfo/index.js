@@ -138,7 +138,7 @@ const StudentInfo = () => {
 
   function finishPractice3() {
     const data = { accepted, rejected };
-    updateProductsStates(idPractica, user?.estudiante.idEstudiante, data);
+    updateProductsStates(user?.estudiante.idEstudiante, idPractica, data); //SE INVIERTE idEstudiante y idPractica, pues estaban al reves
   }
 
   return (

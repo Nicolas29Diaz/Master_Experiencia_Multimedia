@@ -20,6 +20,14 @@ import { ICONS_PRODUCTS } from "constants/index";
 import ModalDocumentsStudent from "Components/Modals/Resources/ModalDocumentsStudent";
 import useModal from "hooks/useModal";
 import { useState } from "react";
+import {
+  REFRESCOS,
+  BOLSA_ARROZ,
+  BARRA_CHOCOLATE,
+  PITILLOS,
+  BARRA_JABON,
+} from "constants/index";
+import useResource from "hooks/useResource";
 const StudentDashboardPractices = () => {
   const { user, userAuthenticate } = useAuth();
   const {
@@ -40,8 +48,11 @@ const StudentDashboardPractices = () => {
   const { isOpen, handleModalState } = useModal();
   const [recurso, setRecurso] = useState();
 
+  const { getVideos, videos } = useResource();
   useEffect(() => {
     userAuthenticate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getVideos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -59,6 +70,12 @@ const StudentDashboardPractices = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, isMessageActive, modulo]);
 
+  function findVideoUrl(nombreRecurso) {
+    console.log("entré");
+    const video = videos.find((video) => video.nombreRecurso === nombreRecurso);
+    return video ? video.urlRecurso : null;
+  }
+
   const handleRedirectoPractice = ({
     nombrePractica,
     idPractica,
@@ -66,6 +83,27 @@ const StudentDashboardPractices = () => {
     nombreProducto,
     descripcion,
   }) => {
+    let videoURL = "";
+    switch (nombreProducto) {
+      case REFRESCOS:
+        videoURL = findVideoUrl("Refrescos");
+        break;
+      case BARRA_CHOCOLATE:
+        videoURL = findVideoUrl("Barra chocolate");
+        break;
+      case BARRA_JABON:
+        videoURL = findVideoUrl("Barra jabon");
+        break;
+      case BOLSA_ARROZ:
+        videoURL = findVideoUrl("Bolsa arroz");
+        break;
+      case PITILLOS:
+        videoURL = findVideoUrl("Pitillos");
+        break;
+      default:
+        break;
+    }
+
     let infoPractice = {
       nombre: nombrePractica,
       descripcion,
@@ -73,7 +111,7 @@ const StudentDashboardPractices = () => {
       corte: idCorte,
       estudiante: `${user?.estudiante.nombreEstudiante} ${user?.estudiante.apellidoEstudiante}`,
       url: `${pathname}/dashboard/${idPractica}/corte-${idCorte}`,
-      urlVideo: "https://VideoFireBase",
+      urlVideo: videoURL,
     };
     getPracticeId(idPractica);
     if (idCorte === 1) {

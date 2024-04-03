@@ -38,6 +38,38 @@ function ResoucesState({ children }) {
     }
   };
 
+  const changeVideo = async (data) => {
+    // Mostrar toast de carga
+    const loadingToastId = toast.loading("Subiendo video...");
+
+    try {
+      // Subir el documento a Firebase Storage
+      const urlResult = await uploadFile(data.file, data.name, "videos");
+
+      // Subir los datos del documento a la API
+      const videoData = {
+        urlRecurso: `${urlResult}`,
+      };
+      const response = await axiosClient.put(
+        `/api/recursos/videos/${data.name}`,
+        videoData
+      );
+      // Si se suben tanto el archivo como los datos a la API correctamente
+      // se actualiza el estado y se muestra un toast de éxito
+      dispatch({
+        type: "POST_VIDEO",
+        payload: response.data.recurso,
+      });
+      // Cerrar el toast de carga
+      toast.dismiss(loadingToastId);
+      toast.success("Video modificado con éxito");
+    } catch (error) {
+      // Cerrar el toast de carga
+      toast.dismiss(loadingToastId);
+      toast.error("Error al subir el video");
+    }
+  };
+
   //DOCUMENTS
   const getDocuments = async () => {
     try {
@@ -54,6 +86,7 @@ function ResoucesState({ children }) {
   };
 
   const postDocuments = async (data) => {
+    // Mostrar toast de carga
     const loadingToastId = toast.loading("Subiendo documento...");
 
     const existingDocument = state.documents.find(
@@ -67,8 +100,6 @@ function ResoucesState({ children }) {
     }
 
     try {
-      // Mostrar toast de carga
-
       // Subir el documento a Firebase Storage
       const urlResult = await uploadFile(data.file, data.name, "documentos");
 
@@ -237,8 +268,6 @@ function ResoucesState({ children }) {
       toast.error("Error al registrar los estudiantes");
     }
   };
-
-  const changeVideo = () => {};
 
   return (
     <ResourceContext.Provider
