@@ -12,6 +12,7 @@ import { DocumentContainer, DocumentGrid, StudentContainer } from "./Styles";
 import Loading from "Components/Loading";
 import ModalSimple from "Components/Modals/Resources/ModalSimple";
 import { useState } from "react";
+//
 function Students() {
   const { isloading, students, getStudents, deleteStudent, deleteAllStudents } =
     useResource();

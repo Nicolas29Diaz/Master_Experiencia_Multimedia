@@ -2,8 +2,9 @@ import { useState } from "react";
 import ModalSimple from "./ModalSimple";
 import { useRef } from "react";
 import useResource from "hooks/useResource";
+import toast from "react-hot-toast";
+import DragDrop from "./DropZone/DragDrop";
 import { useEffect } from "react";
-
 const ModalUploadVideo = ({ isOpen, close, videoName }) => {
   const { changeVideo } = useResource();
   const [file, setFile] = useState(false);
@@ -62,10 +63,21 @@ const ModalUploadVideo = ({ isOpen, close, videoName }) => {
 
   const resourceSelected = (e) => {
     const selectedFile = e.target.files[0];
-    // console.log("Tipo de archivo correcto");
-    setFile(selectedFile);
-    setIndexButtons(1);
+    if (selectedFile.type !== "video/mp4") {
+      toast.error("El tipo de archivo debe ser .mp4");
+      cleanInput();
+      return;
+    } else {
+      // console.log("Tipo de archivo correcto");
+      setFile(selectedFile);
+    }
   };
+
+  useEffect(() => {
+    if (file) {
+      setIndexButtons(1);
+    }
+  }, [file]);
 
   const uploadResource = async () => {
     try {
@@ -103,11 +115,7 @@ const ModalUploadVideo = ({ isOpen, close, videoName }) => {
           <h1 style={{ textAlign: "center" }}>
             Selecciona o arrastra el archivo que deseas subir
           </h1>
-          <br />
-          <br />
-          <h1 style={{ textAlign: "center" }}>DROP</h1>
-          <br />
-          <br />
+          <DragDrop setFile={setFile} cleanInput={cleanInput} typeFile="video/mp4" />
         </>
       )}
     </ModalSimple>

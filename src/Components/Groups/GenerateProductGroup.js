@@ -16,19 +16,6 @@ const GenerateProductGroup = ({ id }) => {
   const selectedProduct = watch(`groups.${id}.producto`);
   const { validationField } = Validations();
 
-  // useEffect(() => {
-  //   // console.log("Group")
-  //   selectedOption?.groups?.find((group) => {
-  //     group.id === id &&
-  //       setValue(`groups.${id}.producto`, {
-  //         value: group.value,
-  //         label: group.label,
-  //       });
-  //     return "";
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [selectedOption]);
-
   return (
     <Fragment key={id}>
       <Controller

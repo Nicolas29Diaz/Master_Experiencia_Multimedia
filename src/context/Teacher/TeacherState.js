@@ -248,7 +248,6 @@ const TeacherState = ({ children }) => {
         type: GET_GROUPS_PRACTICE_3,
         payload: response.data,
       });
-      console.log(response)
     } catch (error) {
       Error();
       console.log(error);

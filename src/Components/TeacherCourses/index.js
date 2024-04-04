@@ -21,11 +21,11 @@ const TeacherCourses = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     return () => {
-      console.log("Chao Curso");
+      "";
     };
-  },[])
+  }, []);
 
   return (
     <>

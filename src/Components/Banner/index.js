@@ -7,7 +7,7 @@ import {
   DocsBanner,
   DocItemBanner,
 } from "./styles";
-import { useEffect } from "react";
+
 // import View from "Icons/View";
 // import { ButtonAction } from "Components/CardCourseItem/styles";
 const Banner = ({ banner }) => {

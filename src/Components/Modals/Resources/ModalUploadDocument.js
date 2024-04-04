@@ -2,7 +2,8 @@ import { useState } from "react";
 import ModalSimple from "./ModalSimple";
 import { useRef } from "react";
 import useResource from "hooks/useResource";
-
+import DragDrop from "./DropZone/DragDrop";
+import { useEffect } from "react";
 const ModalUploadResource = ({ isOpen, close }) => {
   const { postDocuments } = useResource();
   const [file, setFile] = useState(false);
@@ -63,8 +64,13 @@ const ModalUploadResource = ({ isOpen, close }) => {
     const selectedFile = e.target.files[0];
     // console.log("Tipo de archivo correcto");
     setFile(selectedFile);
-    setIndexButtons(1);
   };
+
+  useEffect(() => {
+    if (file) {
+      setIndexButtons(1);
+    }
+  }, [file]);
 
   const uploadResource = async () => {
     try {
@@ -101,11 +107,11 @@ const ModalUploadResource = ({ isOpen, close }) => {
           <h1 style={{ textAlign: "center" }}>
             Selecciona o arrastra el archivo que deseas subir
           </h1>
-          <br />
-          <br />
-          <h1 style={{ textAlign: "center" }}>DROP</h1>
-          <br />
-          <br />
+          <DragDrop
+            setFile={setFile}
+            cleanInput={cleanInput}
+            typeFile="all"
+          ></DragDrop>
         </>
       )}
     </ModalSimple>

@@ -6,7 +6,7 @@ import ShowMessageToCreate from "Components/ShowMessageToCreate";
 import ModalUploadVideo from "Components/Modals/Resources/ModalUploadVideo";
 import { useEffect } from "react";
 import useResource from "hooks/useResource";
-import Button from "Components/Button";
+
 import {
   VideoContainer,
   DocumentGrid,
@@ -14,19 +14,18 @@ import {
   VideoButtonContainer,
 } from "./Styles";
 import Loading from "Components/Loading";
-import ModalSimple from "Components/Modals/Resources/ModalSimple";
+
 import { useState } from "react";
 import { Edit } from "Icons/Edit";
 import View from "Icons/View";
 import { ButtonActionVariant } from "Components/CardCourseItem/styles";
 function Videos() {
-  const { isloading, videos, getVideos, deleteDocuments } = useResource();
+  const { isloading, videos, getVideos } = useResource();
 
   const { isOpen: isOpenSubir, handleModalState: handleModalStateSubir } =
     useModal();
 
   const [infoRecurso, setInfoRecurso] = useState();
-
 
   useEffect(() => {
     getVideos();

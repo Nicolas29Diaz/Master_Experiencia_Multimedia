@@ -9,9 +9,8 @@ const ModalSelectResource = ({ isOpen, close }) => {
   let history = useHistory();
 
   useEffect(() => {
-    console.log("Hola");
     return () => {
-      console.log("Chao ModalSelectResource");
+      "";
     };
   }, []);
 

@@ -179,7 +179,7 @@ const ImageSlider = () => {
             autoplay
             alt={`modelo 3D de ${slideIndex.nombre}`}
           >
-            {console.log(slideIndex.src)}
+            {/* {console.log(slideIndex.src)} */}
             {slideIndex.variablePrincipal && (
               <Hotspot
                 className="Hotspot"

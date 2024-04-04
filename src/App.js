@@ -21,7 +21,7 @@ import NotFound from "Pages/NotFound";
 
 import Students from "Components/Resources/Students";
 import Videos from "Components/Resources/Videos";
-import Documents from "Components/Resources/Documents";
+// import Documents from "Components/Resources/Documents";
 
 import ResoucesState from "context/Resources/ResourcesState";
 // Revisar si tenemos token
@@ -53,11 +53,6 @@ function App() {
                       exact
                       path="/courses/resources/student"
                       component={Students}
-                    />
-                    <PrivateRoute
-                      exact
-                      path="/courses/resources/document"
-                      component={Documents}
                     />
                     <PrivateRoute
                       exact

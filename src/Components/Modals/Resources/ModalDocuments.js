@@ -11,7 +11,7 @@ import { useState } from "react";
 import useResource from "hooks/useResource";
 import Loading from "Components/Loading";
 import useModal from "hooks/useModal";
-import ModalUploadResource from "./ModalUploadResource";
+import ModalUploadResource from "./ModalUploadDocument";
 import ShowMessageToCreate from "Components/ShowMessageToCreate";
 import { Delete } from "Icons/Delete";
 import View from "Icons/View";
@@ -98,7 +98,7 @@ function ModalDocuments({ isOpen, close }) {
         )}
       </ModalSimple>
 
-      {/*  ELIMINAR, PONER EN OTRO COMPONENTE*/}
+      {/* PONER EN OTRO COMPONENTE, OPCIONAL*/}
       <ModalSimple
         isOpen={isOpenDelete}
         close={handleModalStateDelete}

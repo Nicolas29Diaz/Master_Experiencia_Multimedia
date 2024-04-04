@@ -179,7 +179,7 @@ function ResoucesState({ children }) {
   const deleteStudent = async (data) => {
     // Mostrar toast de carga
     const loadingToastId = toast.loading("Eliminando estudiante...");
-    console.log(data);
+
     try {
       // Eliminar el documento de la API
       await axiosClient.delete(`/api/estudiante/${data.idRecurso}`);

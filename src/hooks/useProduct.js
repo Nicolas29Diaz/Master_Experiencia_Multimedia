@@ -27,9 +27,9 @@ const useProduct = () => {
   let reviewedIndex = reviewedSubgroup?.findIndex(
     (rev) => rev?.id === selectedSubgroup?.id
   );
-
-  const counterRejected = rejected == [] ? 0 : rejected.length; //SE MODIFICAN LOS === por ==
-  const counterAccepted = accepted == [] ? 0 : accepted.length;
+//SE MODIFICA, se agrga .length y se cambia [] por 0
+  const counterRejected = rejected.length === 0 ? 0 : rejected.length; 
+  const counterAccepted = accepted.length === 0 ? 0 : accepted.length; 
 
   const deleteSelectedItem = (index, array) =>
     array.filter((item) => item !== index);

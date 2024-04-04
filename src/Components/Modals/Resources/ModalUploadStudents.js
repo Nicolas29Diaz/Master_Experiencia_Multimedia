@@ -5,7 +5,7 @@ import useResource from "hooks/useResource";
 import toast from "react-hot-toast";
 import Papa from "papaparse";
 import { useEffect } from "react";
-import DragDrop from "./DragDrop";
+import DragDrop from "./DropZone/DragDrop";
 // import { options } from "constants/modalsConstants";
 
 function ModalUploadStudents({ isOpen, close, resourceType = "documents" }) {
@@ -95,14 +95,19 @@ function ModalUploadStudents({ isOpen, close, resourceType = "documents" }) {
     // Verificar si el tipo de archivo es .csv si el resourceType es "students"
     if (selectedFile.type !== "text/csv") {
       toast.error("El tipo de archivo debe ser .csv");
-      cleanInput()
+      cleanInput();
       return;
     } else {
       // console.log("Tipo de archivo correcto");
       setFile(selectedFile);
-      setActualButton("UPLOAD");
     }
   };
+
+  useEffect(() => {
+    if (file) {
+      setActualButton("UPLOAD");
+    }
+  }, [file]);
 
   const readCSVFile = (file) => {
     Papa.parse(file, {
@@ -179,7 +184,13 @@ function ModalUploadStudents({ isOpen, close, resourceType = "documents" }) {
           </>
         );
       case "SELECT":
-        return <DragDrop />;
+        return (
+          <DragDrop
+            setFile={setFile}
+            cleanInput={cleanInput}
+            typeFile="text/csv"
+          />
+        );
       case "UPLOAD":
         return (
           <>
