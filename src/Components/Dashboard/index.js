@@ -4,27 +4,31 @@ import {
   HeaderContainer,
   TitleHeader,
   ContainerButton,
+  ContainerTittleButtons,
 } from "./styles";
 import Banner from "Components/Banner";
 import Button from "Components/Button";
 import { useHistory } from "react-router";
+
 const Dashboard = ({
   children,
   banner,
   titleHeader,
-  textButton,
-  onClick = {},
   backButton,
+  buttons = [],
+  goBack = false,
 }) => {
   const history = useHistory();
   return (
     <>
       <DashboardContainer>
-        {backButton && (
+        {(backButton || goBack) && (
           <Button
             type="button"
             styleButton="secondary"
-            onClick={() => history.push(backButton)}
+            onClick={() => {
+              goBack ? history.goBack() : history.push(backButton);
+            }}
           >
             Volver
           </Button>
@@ -33,14 +37,23 @@ const Dashboard = ({
         <HeaderContainer>
           {banner && <Banner banner={banner} />}
 
-          <ContainerButton>
+          <ContainerTittleButtons>
             <TitleHeader>{titleHeader}</TitleHeader>
-            {textButton && (
-              <Button type="button" styleButton="secondary" onClick={onClick}>
-                {textButton}
-              </Button>
+            {buttons.length > 0 && (
+              <ContainerButton>
+                {buttons.map((item, index) => (
+                  <Button
+                    key={index}
+                    type="button"
+                    styleButton={item.style}
+                    onClick={item.action}
+                  >
+                    {item.text}
+                  </Button>
+                ))}
+              </ContainerButton>
             )}
-          </ContainerButton>
+          </ContainerTittleButtons>
         </HeaderContainer>
         {children}
       </DashboardContainer>

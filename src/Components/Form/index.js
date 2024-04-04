@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useForm, Controller, FormProvider } from "react-hook-form";
 //Styles
-import { FormStyle, Title, Row, ButtonActions } from "./styles";
+import { FormStyle, Title, Row } from "./styles";
 
 //Components
 import TextField from "Components/TextField";
@@ -11,6 +11,7 @@ import MultiSelectAll from "Components/MultiSelectAll";
 import TextArea from "Components/TextArea";
 import PracticeGroup from "Components/Practice/PracticeGroup";
 import { useHistory, useParams } from "react-router-dom";
+import ModalDocuments from "Components/Modals/Resources/ModalDocuments";
 
 import ModalForm from "Components/Modals/ModalForm";
 import useModal from "hooks/useModal";
@@ -21,11 +22,15 @@ import {
   registerPracticeModule3,
 } from "./FormServices";
 import ModalExitForm from "Components/Modals/ModalExitForm";
+import useResource from "hooks/useResource";
+
 //Data
 import { optionsModulos, CORTE1, CORTE2, CORTE3 } from "constants/index";
+import { practice_options } from "constants/index";
 
 const Form = () => {
   const methods = useForm();
+
   const { idCurso } = useParams();
   const history = useHistory();
   const [exitForm, setExitForm] = useState(false);
@@ -41,6 +46,13 @@ const Form = () => {
   const [dataForm, setDataForm] = useState([]);
 
   const { isOpen, handleModalState } = useModal();
+
+  //Docs
+  const { getDocuments, documents } = useResource();
+  const {
+    isOpen: isOpenDocuments,
+    handleModalState: handleModalStateDocuments,
+  } = useModal();
 
   const parseIntIdCurso = Number(idCurso);
 
@@ -58,6 +70,8 @@ const Form = () => {
     setIsSendForm(false);
   };
   useEffect(() => {
+    getDocuments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     getStudents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,21 +79,35 @@ const Form = () => {
   useEffect(() => {
     /* Función que envía todos los datos del formulario */
     const handleOnSubmit = async (data) => {
+      const ids = handleDocuments(data.idRecursos);
+
       const {
         field: {
           modulo: { value },
         },
       } = data;
       if (value === CORTE1) {
-        registerPracticeModule1({ ...data, parseIntIdCurso }, idCurso, history);
+        registerPracticeModule1(
+          { ...data, parseIntIdCurso, idRecursos: ids },
+          idCurso,
+          history
+        );
       }
 
       if (value === CORTE2) {
-        registerPracticeModule2({ ...data, parseIntIdCurso }, idCurso, history);
+        registerPracticeModule2(
+          { ...data, parseIntIdCurso, idRecursos: ids },
+          idCurso,
+          history
+        );
       }
 
       if (value === CORTE3) {
-        registerPracticeModule3({ ...data, parseIntIdCurso }, idCurso, history);
+        registerPracticeModule3(
+          { ...data, parseIntIdCurso, idRecursos: ids },
+          idCurso,
+          history
+        );
       }
     };
     if (isSendForm) {
@@ -111,6 +139,23 @@ const Form = () => {
       : methods.setValue("field.tipoMuestreo", "");
   }
 
+  function handleDocuments(data) {
+    let ids = [];
+    data !== undefined &&
+      (ids = data?.map((item) => ({
+        idRecurso: item.idRecurso,
+      })));
+
+    return ids;
+  }
+
+  const handleSelectChange = (selectedOption) => {
+    methods.setValue("field.nombrePractica", selectedOption?.name);
+    methods.setValue("field.descripcion", selectedOption?.description);
+    methods.setValue("field.modulo", selectedOption?.module);
+    methods.setValue("field.participantes", students);
+  };
+
   return (
     <>
       <FormProvider {...methods}>
@@ -118,6 +163,7 @@ const Form = () => {
           onSubmit={(event) => {
             methods.handleSubmit(async (values) => {
               if (isFormValid) {
+                // console.log(values);
                 handleModalState();
                 setDataForm(values);
               }
@@ -128,6 +174,26 @@ const Form = () => {
         >
           <Title>Configurar nueva práctica</Title>
           <Row>
+            <Controller
+              name="selectedOption"
+              control={methods.control}
+              rules={{ required: false }}
+              // defaultValue={practice_options[0]}
+              render={({ field }) => (
+                <MultiSelectAll
+                  {...field}
+                  isMulti={false}
+                  widthSelect={"9rem"}
+                  options={practice_options}
+                  placeholder="Prácticas predeterminadas"
+                  error={error?.modulo}
+                  onChange={(selectedOption) => {
+                    field.onChange(selectedOption);
+                    handleSelectChange(selectedOption);
+                  }}
+                />
+              )}
+            />
             <TextField
               type="text"
               placeholder="Nombre de la práctica"
@@ -147,6 +213,10 @@ const Form = () => {
                   options={optionsModulos}
                   placeholder="Módulo"
                   error={error.field?.modulo}
+                  value={optionsModulos.find(
+                    (modulo) =>
+                      modulo.value === methods.getValues("field.modulo")?.value
+                  )} // Seleccionar automáticamente el módulo correspondiente al valor del campo modulo
                   onChange={(e) => {
                     onChange(e);
                     handleTipoMuestreo(e);
@@ -171,7 +241,7 @@ const Form = () => {
                     },
                     ...students,
                   ]}
-                  widthSelect={"20rem"}
+                  widthSelect={"15rem"}
                   closeMenuOnSelect={false}
                   getOptionLabel={(option) => option.estudiante}
                   getOptionValue={(option) => option.idEstudiante}
@@ -186,6 +256,38 @@ const Form = () => {
                 />
               )}
             />
+            <Controller
+              name="idRecursos"
+              control={methods.control}
+              rules={{ required: false }}
+              render={({ field: { onChange, name, value } }) => (
+                <MultiSelectAll
+                  asyncSelect
+                  cacheOptions
+                  loadOptions={documents}
+                  isMulti={true}
+                  defaultOptions={[...documents]}
+                  widthSelect={"15rem"}
+                  closeMenuOnSelect={false}
+                  getOptionLabel={(option) => option.nombreRecurso}
+                  getOptionValue={(option) => option.idRecurso}
+                  placeholder="Documentos para la práctica"
+                  error={error?.field?.idRecursos}
+                  onChange={(e) => {
+                    onChange(e);
+                  }}
+                  name={name}
+                  value={value}
+                />
+              )}
+            />
+            <Button
+              type="button"
+              styleButton={"primary"}
+              onClick={handleModalStateDocuments}
+            >
+              Gestionar Documentos
+            </Button>
           </Row>
 
           {/* Descripción de la práctica */}
@@ -203,23 +305,21 @@ const Form = () => {
           <PracticeGroup />
 
           <Row>
-            <ButtonActions>
-              <Button
-                type="button"
-                styleButton="secondary"
-                onClick={handleExitForm}
-              >
-                Cancelar
-              </Button>
+            <Button
+              type="button"
+              styleButton="secondary"
+              onClick={handleExitForm}
+            >
+              Cancelar
+            </Button>
 
-              <Button
-                type="submit"
-                styleButton="primary"
-                disabled={numberOfGroupsWatch && !numberOfGroupsWatch.length}
-              >
-                Publicar
-              </Button>
-            </ButtonActions>
+            <Button
+              type="submit"
+              styleButton="primary"
+              disabled={numberOfGroupsWatch && !numberOfGroupsWatch.length}
+            >
+              Publicar
+            </Button>
           </Row>
         </FormStyle>
       </FormProvider>
@@ -238,6 +338,11 @@ const Form = () => {
           onClick={sendFormValid}
         />
       )}
+      {/* Se muestra el modal para gestionar documentos*/}
+      <ModalDocuments
+        isOpen={isOpenDocuments}
+        close={handleModalStateDocuments}
+      />
     </>
   );
 };

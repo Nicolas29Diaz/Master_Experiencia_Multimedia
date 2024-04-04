@@ -39,12 +39,14 @@ export const ButtonForm = styled.button`
   border-radius: 3.75rem;
   cursor: pointer;
   display: inline-block;
-  height: 2.5rem;
+  min-height: 2.5rem;
+  max-height: 5rem;
   outline: none;
   transition: 0.2s;
   font-size: 1.125rem;
   min-width: 10rem;
-  padding: 0 0.625rem;
+  padding: 5px 0.625rem;
+
 
   :disabled {
     opacity: 0.4;

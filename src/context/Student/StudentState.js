@@ -275,6 +275,7 @@ const StudentState = ({ children }) => {
   };
 
   const getProductsPracticeThree = async (idPractica, idEstudiante) => {
+    console.log("GET PRDOUCTS PRACTICE 3")
     try {
       const response = await axiosClient.get(
         `api/producto/corte3/inspeccion/${idPractica}/estudiante/${idEstudiante}`

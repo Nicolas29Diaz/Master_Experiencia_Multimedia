@@ -15,6 +15,14 @@ const TeacherDashboardPractices = () => {
 
   const handleCreatePractice = () => history.push(`${idCurso}/create-practice`);
 
+  const buttons = [
+    {
+      text: "Crear práctica",
+      style: "secondary",
+      action: handleCreatePractice,
+    },
+  ];
+
   useEffect(() => {
     getAllPractices(Number(idCurso));
   }, [idCurso, getAllPractices]);
@@ -27,8 +35,7 @@ const TeacherDashboardPractices = () => {
       ) : (
         <Dashboard
           titleHeader="Prácticas"
-          textButton="Crear práctica"
-          onClick={handleCreatePractice}
+          buttons={buttons}
           backButton="/courses"
         >
           <TeacherContainerPractices practices={practices}>

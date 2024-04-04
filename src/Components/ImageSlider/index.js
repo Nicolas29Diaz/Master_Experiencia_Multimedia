@@ -76,6 +76,11 @@ const ImageSlider = () => {
   }, [idPractica, user?.estudiante.idEstudiante, modulo]);
 
   useEffect(() => {
+    console.log("PRODUCTOS:");
+    console.log(products);
+  }, [products]);
+
+  useEffect(() => {
     if (modulo === CORTE2) {
       const getArrays = Object.entries(subgroups).filter(
         ([key, value]) => key.startsWith("Atributo") && value.length > 0
@@ -174,6 +179,7 @@ const ImageSlider = () => {
             autoplay
             alt={`modelo 3D de ${slideIndex.nombre}`}
           >
+            {/* {console.log(slideIndex.src)} */}
             {slideIndex.variablePrincipal && (
               <Hotspot
                 className="Hotspot"

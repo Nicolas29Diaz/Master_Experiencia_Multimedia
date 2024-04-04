@@ -17,6 +17,8 @@ import {
   SIZE_FIELD,
   VARIABLE,
 } from "constants/index";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const SelectedProductGroup = ({ selectedProduct, id }) => {
   const {
@@ -34,7 +36,7 @@ const SelectedProductGroup = ({ selectedProduct, id }) => {
   const { validationField } = Validations();
 
   const filterNames = watch("groups.filterNames");
-
+  let contPr = useRef(0);
   function populateFilterNames(value) {
     const selectedCurrentOptions = value.map(({ estudiante }) => estudiante);
     setValue("groups.filterNames", [
@@ -43,6 +45,16 @@ const SelectedProductGroup = ({ selectedProduct, id }) => {
       ...(filterNames ?? []).slice(id + 1),
     ]);
   }
+
+  useEffect(() => {
+    if (contPr.current < 1) {
+      contPr.current++;
+    } else {
+      setValue(`groups.${id}.atributos`, "");
+      setValue(`groups.${id}.cont`, "");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedProduct]);
 
   return optionsProducto
     .filter((product) => product.label === selectedProduct)

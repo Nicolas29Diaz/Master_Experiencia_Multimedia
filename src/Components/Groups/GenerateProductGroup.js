@@ -28,6 +28,10 @@ const GenerateProductGroup = ({ id }) => {
             options={optionsNameProduct}
             placeholder="Seleccionar producto"
             error={errors?.groups?.[id]?.producto}
+            // value={optionsNameProduct.find(
+            //   (product) =>
+            //     product.value === getValues(`groups.${id}.producto`)?.value
+            // )} // Seleccionar automáticamente el módulo correspondiente al valor del campo modulo
             {...field}
           />
         )}
