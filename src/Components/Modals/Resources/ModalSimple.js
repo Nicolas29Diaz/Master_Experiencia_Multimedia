@@ -11,6 +11,7 @@ function ModalSimple({
   buttons = [],
   children,
   alignTitle = true,
+  centerButton = false,
 }) {
   return (
     <Modal isOpen={isOpen} close={close}>
@@ -28,6 +29,7 @@ function ModalSimple({
                 type="button"
                 styleButton={item.style}
                 onClick={item.action}
+                style={centerButton ? { margin: "auto" } : {}}
               >
                 {item.text}
               </Button>

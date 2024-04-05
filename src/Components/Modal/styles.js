@@ -34,7 +34,6 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 15px 10px;
-
   @media (max-width: 645px) {
     flex-direction: column;
     align-items: center;

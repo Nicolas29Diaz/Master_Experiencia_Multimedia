@@ -51,6 +51,7 @@ export const CardActions = styled.footer`
 export const ButtonAction = styled.button`
   padding: 0.5rem 0.4rem;
   border: none;
+  border-radius: 5px;
   background-color: transparent;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
