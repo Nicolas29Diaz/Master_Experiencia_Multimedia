@@ -30,12 +30,13 @@ export const BigImage = styled.div`
   }
 `;
 
-export const Message = styled.p`
+export const Message = styled.div`
   height: 100%;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction:column;
 `;
 
 export const Wrapper = styled.div`

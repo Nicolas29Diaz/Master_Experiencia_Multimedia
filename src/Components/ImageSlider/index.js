@@ -76,11 +76,6 @@ const ImageSlider = () => {
   }, [idPractica, user?.estudiante.idEstudiante, modulo]);
 
   useEffect(() => {
-    console.log("PRODUCTOS:");
-    console.log(products);
-  }, [products]);
-
-  useEffect(() => {
     if (modulo === CORTE2) {
       const getArrays = Object.entries(subgroups).filter(
         ([key, value]) => key.startsWith("Atributo") && value.length > 0
@@ -161,9 +156,17 @@ const ImageSlider = () => {
     <SliderContainer>
       <BigImage>
         {Object.keys(slideIndex).length === 0 ? (
-          <Message>
-            Selecciona un producto para empezar a inspeccionarlo
-          </Message>
+          <>
+            <Message>
+              <p style={{ margin: "10px" }}>
+                Selecciona un producto para empezar a inspeccionarlo
+              </p>
+              <p style={{ margin: "10px", color: "#c4c4c4" }}>
+                Tranquilo, si no cargan los productos, puedes reiniciar la
+                página.
+              </p>
+            </Message>
+          </>
         ) : (
           <model-viewer
             src={slideIndex.src}
@@ -179,7 +182,6 @@ const ImageSlider = () => {
             autoplay
             alt={`modelo 3D de ${slideIndex.nombre}`}
           >
-            {/* {console.log(slideIndex.src)} */}
             {slideIndex.variablePrincipal && (
               <Hotspot
                 className="Hotspot"

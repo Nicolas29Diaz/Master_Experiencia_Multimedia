@@ -22,6 +22,7 @@ function ModalDocumentsStudent({ isOpen, close, recursos }) {
             action: close,
           },
         ]}
+        centerButton={true}
       >
         <DocumentContainer>
           <DocumentGrid>

@@ -50,7 +50,7 @@ export const ButtonAction = styled.button`
   background-color: transparent;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
-
+  border-radius: 5px;
   &:nth-child(1):hover {
     background-color: ${Colors.primary};
     fill: ${Colors.white};
@@ -72,8 +72,7 @@ export const ButtonActionVariant = styled.button`
   background-color: transparent;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
-
-
+  border-radius: 5px;
   &:hover {
     background-color: ${(props) => {
       switch (props.colorHover) {
